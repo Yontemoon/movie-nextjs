@@ -1,6 +1,10 @@
+
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +18,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <main className="w-screen overflow-x-hidden flex flex-col ">
+          <Navbar/>
+          <div className="flex flex-col w-3/5 justify-center items-center content-center self-center">
+            {children}
+          </div>
+        </main>
+      </body>
     </html>
   );
 }
