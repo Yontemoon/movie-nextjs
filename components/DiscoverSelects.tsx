@@ -7,10 +7,17 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
+import { Button } from "./ui/button";
+
 import { genres } from "@/library/genres";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { years } from "@/library/years";
 import countries from "@/library/countries";
+import { years } from "@/library/years";
+import sortBy from "@/library/sortBy";
+
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+
+
+
 
 const DiscoverSelects = () => {
 
@@ -25,12 +32,14 @@ const DiscoverSelects = () => {
         const params = new URLSearchParams(searchParams)
         if (value) {
             params.set(key, value)
+            params.set("page", "1")
         } else {
             params.delete(key)
         }
+        const page = params.get("page")
         replace(`${pathname}?${params.toString()}`)
-
     }
+
     return (
         <span className="flex">
             <Select onValueChange={(value) => handleSearchParams("genre", value)} defaultValue={searchParams.get("genre")?.toString()}>
@@ -70,7 +79,24 @@ const DiscoverSelects = () => {
                     ))}
                 </SelectContent>
             </Select>
+
+            <Select onValueChange={(value) => handleSearchParams("sortBy", value)} defaultValue={searchParams.get("sortBy")?.toString() || "popularity.desc"}>
+                <SelectTrigger className="w-[180px]">
+                    <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                    {sortBy.map((sort, index) => (
+                        <SelectItem key={index} value={sort.key}>
+                            {sort.label}
+                        </SelectItem>
+                    ))}
+                </SelectContent>
+            </Select>
+            
             {/* ADD A FILTER SECTION */}
+            <Button >
+                Reset
+            </Button>
         </span>
     );
 };
