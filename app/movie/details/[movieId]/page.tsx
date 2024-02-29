@@ -1,11 +1,20 @@
-import React from 'react';
+"use server"
 
-const MovieDetailsPage = ({params}: any) => {
-    // console.log(params)
+import MovieInfo from "@/components/MovieInfo";
+import { fetchData } from "@/library/db";
+
+type paramsProp = {
+    params: {
+        movieId: string
+    }
+}
+
+const MovieDetailsPage = async ({params}: paramsProp) => {
+    const movieDetails = await fetchData(`/movie/${params.movieId}?language=en-US`)
     return (
-        <div>
-            movie
-        </div>
+        <>
+            <MovieInfo details={movieDetails}/>
+        </>
     );
 };
 

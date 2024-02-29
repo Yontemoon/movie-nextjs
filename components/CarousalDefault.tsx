@@ -7,10 +7,8 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
-import Image from 'next/image';
-import { imageUrl } from '@/library/url';
 import Link from 'next/link';
-import { Separator } from './ui/separator';
+import PosterCard from './PosterCard';
 
 
 type NowPlayingTypes = {
@@ -35,15 +33,7 @@ const CarousalDefault = ({movieList, title}: NowPlayingTypes) => {
                     {movieList.map((movie) => (
                         <CarouselItem key={movie.id} className='md:basis-1/3 lg:basis-1/5'>
                             <Link href={`/movie/details/${movie.id}`}>
-                            <div className=''>
-                                <Image 
-                                    width={1000}
-                                    height={1000}
-                                    alt={movie.title}
-                                    src={`${imageUrl}${movie.poster_path}`}
-                                    className='rounded-md hover:opacity-80 transition-opacity'
-                                />
-                            </div>
+                                <PosterCard details={movie}/>
                             </Link>
                         </CarouselItem>
                     ))}

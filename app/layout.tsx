@@ -21,10 +21,10 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-slate-700`}>
         <main className="w-screen overflow-x-hidden flex flex-col ">
           <Navbar/>
-          <div className="flex flex-col w-3/5 justify-center items-center content-center self-center">
+          <div className="flex flex-col w-3/5 justify-center items-center content-center self-center text-white">
             {children}
           </div>
         </main>

@@ -41,9 +41,9 @@ const Popular = ({popular}: PopularPropTypes) => {
         >
             <CarouselContent className="flex">
                 {populars.map((movie) => (
-                    <CarouselItem key={movie.id}>
+                    <CarouselItem key={movie.id} >
                         <Link href={`/movie/details/${movie.id}`}>
-                            <div className="relative h-96 w-full">
+                            <div className="relative h-96 w-full hover:cursor-grab">
                                 <Image 
                                     alt={movie.title}
                                     fill
