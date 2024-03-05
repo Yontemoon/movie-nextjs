@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { Toaster } from "@/components/ui/sonner";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,12 +23,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-slate-700`}>
-        <main className="w-screen overflow-x-hidden flex flex-col ">
+        <div className="w-screen overflow-x-hidden flex flex-col ">
           <Navbar/>
-          <div className="flex flex-col w-3/5 justify-center items-center content-center self-center text-white">
+          <div className="flex flex-col justify-center items-center content-center self-center text-white container">
             {children}
+            <Toaster/>
           </div>
-        </main>
+        </div>
       </body>
     </html>
   );

@@ -1,7 +1,9 @@
 "use server"
 
 import MovieInfo from "@/components/MovieInfo";
+import MovieRecommendations from "@/components/MovieRecommendations";
 import { fetchData } from "@/library/db";
+
 
 type paramsProp = {
     params: {
@@ -10,10 +12,16 @@ type paramsProp = {
 }
 
 const MovieDetailsPage = async ({params}: paramsProp) => {
-    const movieDetails = await fetchData(`/movie/${params.movieId}?language=en-US`)
+    const [movieDetails, movieRecommendations, movieCredits] = await Promise.all([
+        fetchData(`/movie/${params.movieId}?language=en-US`),
+        fetchData(`/movie/${params.movieId}/recommendations?language=en-US&page=1`),
+        fetchData(`/movie/${params.movieId}/credits?language=en-US`)
+    ]);
     return (
         <>
-            <MovieInfo details={movieDetails}/>
+            <MovieInfo details={movieDetails} movieCredits={movieCredits}/>
+            <MovieRecommendations movieRecommendations={movieRecommendations}/>
+            
         </>
     );
 };

@@ -3,7 +3,9 @@ module.exports = {
         remotePatterns: [
           {
             protocol: 'https',
-            hostname: '**',
+            hostname: 'image.tmdb.org',
+            port: '',
+            pathname: '/t/p/original/**'
           },
         ],
       },
