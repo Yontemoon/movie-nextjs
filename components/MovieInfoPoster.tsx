@@ -21,25 +21,28 @@ type MovieInfoPosterProps = {
 
 const MovieInfoPoster = ({ details, className }: MovieInfoPosterProps) => {
     return (
-        <Dialog>
-            <TooltipProvider>
+        <>
+            {/* <TooltipProvider>
                 <Tooltip>
-                    <TooltipTrigger>
-                        <DialogTrigger>
+                    <TooltipTrigger> */}
+                        {/* <DialogTrigger> */}
+                        
                             <PosterCard width={300} height={600}details={details} className={`${className} `} pointerEvent={false}/>
-                        </DialogTrigger>
-                    </TooltipTrigger>
+                        
+                        
+                        {/* </DialogTrigger> */}
+                    {/* </TooltipTrigger>
                     <TooltipContent>
                         <p>Click to enlarge.</p>
-                    </TooltipContent>
-                    <DialogContent>
+                    </TooltipContent> */}
+                    {/* <DialogContent>
 
-                        {/* <PosterCard width={1000} height={1000} details={details} /> */}
+                        <PosterCard width={1000} height={1000} details={details} />
                         <p>This is a dialog box</p>
-                    </DialogContent>
-                </Tooltip>
-            </TooltipProvider>
-        </Dialog>
+                    </DialogContent> */}
+                {/* </Tooltip>
+            </TooltipProvider> */}
+        </>
     );
 };
 

@@ -30,7 +30,7 @@ const Navbar = () => {
                 <p>TEST</p>
                 <div className="w-full flex-1 md:w-auto md:flex-none">
             <Dialog>
-                {/* <Button > */}
+            
                     <DialogTrigger>
                         Searching for...
                     </DialogTrigger>
@@ -38,7 +38,7 @@ const Navbar = () => {
                         <SearchDialog/>
                     </DialogContent>
 
-                {/* </Button> */}
+                
             </Dialog>
                 </div>
 

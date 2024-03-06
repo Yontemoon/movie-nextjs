@@ -16,6 +16,16 @@ export type movieDetails = {
     tagline: string
 }
 
+export type MovieCastDetails = movieDetails & {
+    character: string;
+    order: number;
+}
+
+export type MovieCrewDetails = movieDetails & {
+    department: string;
+    job: string
+}
+
 export type MoviePosterType = {
     id: number;
     title: string;
@@ -26,25 +36,34 @@ export type MoviePosterType = {
 
 export type MovieCreditDetailsType = {
     id: number
-    cast: CastDetails[]
-    crew: CrewDetails[]
-
+    cast: MovieCastDetails[]
+    crew: MovieCrewDetails[]
 }
 
-export type CastDetails = {
+export type PersonCreditDetailsType = {
+    id: number
+    cast: PersonCastDetails[]
+    crew: PersonCrewDetails[]
+}
+
+
+export type PersonCastDetails = {
     id: number;
     known_for_department: string
-    name: string;
+    name: string
     profile_path: string;
-    order: number;
     character: string
+    original_name: string;
+    vote_average: string;
+    vote_count: string;
+    order: number;
+    release_date: string,
 }
 
-export type CrewDetails = {
+export type PersonCrewDetails = {
     id: number;
     known_for_department: string;
-    name: string;
-    profile_path: string;
     department: string;
     job: string
 }
+

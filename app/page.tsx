@@ -18,10 +18,10 @@ export default async function Home() {
 
   // console.log(nowPlaying)
   return (
-    <main className="">
+    <div className="">
       <Popular popular={popular}/>
       <CarousalDefault title="Now Playing" movieList={nowPlaying} />
       <CarousalDefault title="Top Rated" movieList={topRated}/>
-    </main>
+    </div>
   );
 }

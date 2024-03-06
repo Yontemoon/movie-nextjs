@@ -17,6 +17,7 @@ const MovieDetailsPage = async ({params}: paramsProp) => {
         fetchData(`/movie/${params.movieId}/recommendations?language=en-US&page=1`),
         fetchData(`/movie/${params.movieId}/credits?language=en-US`)
     ]);
+    // console.log(movieCredits)
     return (
         <>
             <MovieInfo details={movieDetails} movieCredits={movieCredits}/>

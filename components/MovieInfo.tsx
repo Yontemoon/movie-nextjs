@@ -1,7 +1,7 @@
 "use server"
 
 import React from 'react';
-import { movieDetails, MovieCreditDetailsType } from '@/library/modals';
+import { movieDetails, PersonCreditDetailsType } from '@/library/modals';
 import { imageUrl } from "@/library/url";
 import Image from 'next/image';
 import { getYear } from "date-fns"
@@ -11,7 +11,7 @@ import MovieInfoPoster from './MovieInfoPoster';
 
 type MovieInfoProps = {
     details: movieDetails;
-    movieCredits: MovieCreditDetailsType;
+    movieCredits: PersonCreditDetailsType;
 }
 
 const MovieInfo = ({ details, movieCredits }: MovieInfoProps) => {
