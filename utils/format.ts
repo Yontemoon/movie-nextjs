@@ -1,9 +1,16 @@
+"use client"
 
+import {format, parseISO} from "date-fns"
 
-//format date
+export const formatDate = (date: string) => {
+    const parsedDate = parseISO(date)
+    return format(parsedDate, "PPP")
+}
 
+export const roundNumber = (number: number) => {
+    return Math.round(number * 10) / 10;
 
-//rounding to 2nd decimal
+}
 
 export const initials = (name: string) => {
     let words = name.split(" ")
