@@ -1,3 +1,5 @@
+"use server"
+
 import { movieDetails } from '@/library/modals';
 import React from 'react';
 import { fetchResults, fetchData } from '@/library/db';
@@ -12,6 +14,7 @@ import {
 } from "@/components/ui/pagination"
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import PaginationControls from './PaginationControls';
+import PosterCard from './PosterCard';
 
 
 const DiscoverResults = async ({
@@ -36,11 +39,12 @@ const DiscoverResults = async ({
 
     return (
         <div>
-            {results.map((result: movieDetails) => (
-                <p key={result.id}>
-                    {result.title}
-                </p>
-            ))}
+            <div className='flex-wrap flex gap-3 my-5'>
+                {results.map((result: movieDetails) => (
+                    <PosterCard key={result.id} details={result} width={256} height={384} sizes="(min-width: 560px) 256px, (min-width: 520px) calc(415vw - 1985px), calc(54.5vw - 24px)"/>
+                ))}
+            </div>
+           
 
             <PaginationControls
                 hasNextPage={Number(pageQuery) < total_pages}

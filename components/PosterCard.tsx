@@ -11,6 +11,7 @@ import Heart from './icons/Heart';
 import { toast } from 'sonner';
 import Ellipsis from './icons/Ellipsis';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuLabel } from './ui/dropdown-menu';
+import DefaultPoster from './DefaultPoster';
 
 
 type PosterProps = {
@@ -24,6 +25,7 @@ type PosterProps = {
 
 const PosterCard = ({ details, className, width, height, sizes, pointerEvent = true }: PosterProps) => {
 
+    const [isLoading, setIsLoading] = useState(true)
     const [showHover, setShowHover] = useState(false)
     const ellipsisRef = useRef<HTMLDivElement>(null)
 
@@ -57,6 +59,7 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
             onMouseLeave={handleMouseLeave}
         >
             <Link href={`/movie/details/${details.id}`} className={pointerEvent ? `` : `pointer-events-none`}>
+                {details.poster_path === null ? <DefaultPoster movieTitle={`${details.title}`}/> :
                 <Image
 
                     src={`${imageUrl}${details.poster_path}`}
@@ -64,15 +67,18 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
                     width={width}
                     height={height}
                     sizes={sizes}
-
-                    // fill
-                    // sizes="(max-width: 640px) 100vw, 25vw" 
-                    // sizes="(min-width: 540px) 260px, calc(54.55vw - 24px)" 
-                    className={`w-full h-autoborder-white rounded-md shadow-2xl hover:border-slate-500 transition-shadow duration-300 cursor-pointer ${className} ${showHover ? 'opacity-50' : ''}`}
+                    className=
+                        {`w-full h-auto border-white transition-all rounded-md 
+                        shadow-2xl hover:border-slate-500 duration-300 cursor-pointer 
+                        ${className} 
+                        ${showHover ? 'opacity-50' : ''}
+                        ${isLoading ? " blur-lg " : " blur-0 "}`}
+                    onLoadingComplete={() => setIsLoading(false)}
                     priority
                     quality={50}
                     
-                />
+                    
+                />}
             </Link>
             {showHover && (
                 <>

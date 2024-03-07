@@ -23,6 +23,7 @@ import {
     CommandSeparator,
     CommandShortcut,
   } from "@/components/ui/command"
+import DefaultPoster from "./DefaultPoster";
 
 const SearchDialog = () => {
     const [searchQuery, setSearchQuery] = useState("")
@@ -66,12 +67,13 @@ const SearchDialog = () => {
                             <Link href={`/movie/details/${result.id}`}>
                                 <div className="flex p-1 gap-3">
                                     {/* <div> */}
+                                    {result.poster_path === null ? <DefaultPoster movieTitle={`${result.title}`}/> :
                                     <Image 
                                         width={50}
                                         height={100}
                                         alt={result.title}
                                         src={`${imageUrl}${result.poster_path}`}
-                                    />
+                                    />}
                                     {/* </div> */}
                                     <div className="flex flex-col w-full">
                                         <h3>{result.title}</h3>
