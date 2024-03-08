@@ -12,10 +12,10 @@ import {
     DialogContent,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { movieDetails } from "@/library/modals";
+import { MovieDetailsType } from "@/library/modals";
 
 type MovieInfoPosterProps = {
-    details: movieDetails;
+    details: MovieDetailsType;
     className?: string
 }
 

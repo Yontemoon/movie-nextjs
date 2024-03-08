@@ -1,5 +1,5 @@
 import React from 'react';
-import { movieDetails } from '@/library/modals';
+import { MovieDetailsType } from '@/library/modals';
 import DiscoverResults from '@/components/DiscoverResults';
 import DiscoverSelects from '@/components/DiscoverSelects';
 

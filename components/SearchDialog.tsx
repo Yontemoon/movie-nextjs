@@ -5,7 +5,7 @@ import { Input } from "./ui/input";
 import { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import { imageUrl } from "@/library/url";
-import { movieDetails } from "@/library/modals";
+import { MovieDetailsType } from "@/library/modals";
 import { getGenreName } from "@/library/genres";
 import Link from "next/link";
 import { DialogClose } from "./ui/dialog";
@@ -27,7 +27,7 @@ import DefaultPoster from "./DefaultPoster";
 
 const SearchDialog = () => {
     const [searchQuery, setSearchQuery] = useState("")
-    const [results, setResults] = useState<movieDetails[] | null>(null)
+    const [results, setResults] = useState<MovieDetailsType[] | null>(null)
     const [showLoading, setShowLoading] = useState(false)
 
     useEffect(() => {

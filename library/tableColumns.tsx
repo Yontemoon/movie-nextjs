@@ -11,7 +11,6 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
     { 
         accessorKey: 'release_date', 
         header: ({column}) => {
-            console.log(column)
             return (
                 <h3
                     className="hover:cursor-pointer flex"
@@ -99,7 +98,6 @@ export const CrewColumns: ColumnDef<MovieCrewDetails, any>[] = [
     { 
         accessorKey: 'release_date', 
         header: ({column}) => {
-            console.log(column)
             return (
                 <h3
                     className="hover:cursor-pointer flex"

@@ -1,4 +1,4 @@
-export type movieDetails = {
+export type MovieDetailsType = {
     adult: boolean
     backdrop_path: string;
     genre_ids: number[]
@@ -16,12 +16,26 @@ export type movieDetails = {
     tagline: string
 }
 
-export type MovieCastDetails = movieDetails & {
+export type PersonDetailsType = {
+    biography: string;
+    imdb_id: string;
+    known_for_department: string;
+    name: string;
+    popularity: number;
+    profile_path: string;
+}
+
+export type ExternalIdsTypes = {
+    id: number;
+    imdb_id: string
+}
+
+export type MovieCastDetails = MovieDetailsType & {
     character: string;
     order: number;
 }
 
-export type MovieCrewDetails = movieDetails & {
+export type MovieCrewDetails = MovieDetailsType & {
     department: string;
     job: string
 }

@@ -26,8 +26,6 @@ const PersonAccordianTable = ({ ActingCredits, MiscCredits }: PageProps) => {
                 <AccordionTrigger>Actor</AccordionTrigger>
                 <AccordionContent>
                     <CreditTable data={ActingCredits} columns={CastColumns}/>
-                    
-                    
                 </AccordionContent>
             </AccordionItem>
             {MiscCredits.map((department, index) => (
@@ -35,8 +33,6 @@ const PersonAccordianTable = ({ ActingCredits, MiscCredits }: PageProps) => {
                     <AccordionTrigger>{department.department}</AccordionTrigger>
                     <AccordionContent>
                         <CreditTable data={department.credits} columns={CrewColumns}/>
-
-                        
                     </AccordionContent>
                 </AccordionItem>
             ))}

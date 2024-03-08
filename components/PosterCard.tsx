@@ -1,6 +1,6 @@
 "use client"
 
-import { MoviePosterType, movieDetails } from '@/library/modals';
+import { MoviePosterType, MovieDetailsType } from '@/library/modals';
 import Image from 'next/image';
 import { imageUrl } from '@/library/url';
 import { useState, useRef } from 'react';
@@ -15,7 +15,7 @@ import DefaultPoster from './DefaultPoster';
 
 
 type PosterProps = {
-    details: movieDetails | MoviePosterType
+    details: MovieDetailsType | MoviePosterType
     className?: string
     width: number
     height: number;

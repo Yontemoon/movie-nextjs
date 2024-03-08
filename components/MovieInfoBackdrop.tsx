@@ -2,10 +2,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import { imageUrl } from "@/library/url";
-import { movieDetails } from "@/library/modals";
+import { MovieDetailsType } from "@/library/modals";
 
 type PropTypes = {
-    details: movieDetails
+    details: MovieDetailsType
 }
 
 const MovieInfoBackdrop = ({details}: PropTypes) => {

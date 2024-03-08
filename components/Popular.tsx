@@ -14,13 +14,13 @@ import { getGenreName } from "@/library/genres";
 import GenreButtons from "./GenreButtons";
 
 
-import { movieDetails } from "@/library/modals";
+import { MovieDetailsType } from "@/library/modals";
 import Image from "next/image";
 import { imageUrl } from "@/library/url";
 import Link from "next/link";
 
 type PopularPropTypes = {
-    popular: movieDetails[]
+    popular: MovieDetailsType[]
 }
 
 

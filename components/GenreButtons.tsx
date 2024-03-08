@@ -2,12 +2,12 @@
 
 import { getGenreName } from "@/library/genres";
 import { Button } from "./ui/button";
-import { movieDetails } from "@/library/modals";
+import { MovieDetailsType } from "@/library/modals";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
 
-const GenreButtons = ({movie}: {movie: movieDetails}) => {
+const GenreButtons = ({movie}: {movie: MovieDetailsType}) => {
 
 
 
