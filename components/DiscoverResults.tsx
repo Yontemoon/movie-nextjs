@@ -2,17 +2,8 @@
 
 import { movieDetails } from '@/library/modals';
 import React from 'react';
-import { fetchResults, fetchData } from '@/library/db';
-import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination"
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { fetchData } from '@/library/db';
+
 import PaginationControls from './PaginationControls';
 import PosterCard from './PosterCard';
 

@@ -6,20 +6,9 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
-import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
-import Link from 'next/link';
 import { MovieCastDetails, MovieCrewDetails } from "@/library/modals";
-import { formatDate } from "@/utils/format";
-import { roundNumber } from "@/utils/format";
 import CreditTable from "./CreditTable";
+import { CastColumns, CrewColumns } from "@/library/tableColumns";
 
 type PageProps = {
     ActingCredits: MovieCastDetails[]
@@ -30,12 +19,13 @@ type PageProps = {
 }
 
 const PersonAccordianTable = ({ ActingCredits, MiscCredits }: PageProps) => {
+    // console.log(ActingCredits)
     return (
         <Accordion type="single" defaultValue="item-0" collapsible className='w-full'>
             <AccordionItem value="item-0">
                 <AccordionTrigger>Actor</AccordionTrigger>
                 <AccordionContent>
-                    <CreditTable data={ActingCredits} creditType="cast"/>
+                    <CreditTable data={ActingCredits} columns={CastColumns}/>
                     
                     
                 </AccordionContent>
@@ -44,7 +34,7 @@ const PersonAccordianTable = ({ ActingCredits, MiscCredits }: PageProps) => {
                 <AccordionItem key={index} value={department.department} >
                     <AccordionTrigger>{department.department}</AccordionTrigger>
                     <AccordionContent>
-                        <CreditTable data={department.credits} creditType="crew"/>
+                        <CreditTable data={department.credits} columns={CrewColumns}/>
 
                         
                     </AccordionContent>

@@ -8,6 +8,7 @@ import { getYear } from "date-fns"
 import Link from 'next/link';
 import AvatarCarousal from './AvatarCarousal';
 import MovieInfoPoster from './MovieInfoPoster';
+import MovieInfoBackdrop from './MovieInfoBackdrop';
 
 type MovieInfoProps = {
     details: movieDetails;
@@ -17,22 +18,7 @@ type MovieInfoProps = {
 const MovieInfo = ({ details, movieCredits }: MovieInfoProps) => {
     return (
         <>
-            <div
-                className='relative h-[500px] w-screen'
-                style={{ maskImage: 'linear-gradient(to bottom, black, transparent)' }}
-            >
-                <Image
-                    alt={details.original_title}
-                    src={`${imageUrl}${details.backdrop_path}`}
-                    fill
-                    priority
-                    className='absolute inset-0  w-full object-cover'
-                    placeholder='blur'
-                    blurDataURL={`${imageUrl}${details.backdrop_path}`} //plaiceholder?
-                    sizes="100vw"
-                // quality={60}
-                />
-            </div>
+            <MovieInfoBackdrop details={details}/>
             <div className='grid w-full gap-5 grid-cols-4 '>
                 <MovieInfoPoster details={details} className='row-span-1'/>
                 <div className='col-span-3'>
