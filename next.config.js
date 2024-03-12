@@ -9,5 +9,12 @@ module.exports = {
       },
     ],
   },
-  domains: ['image.tmdb.org'],
+  // async redirect() {
+  //   return [
+  //     {
+  //       source: "/login",
+  //       destination: ''
+  //     }
+  //   ]
+  // }
 };

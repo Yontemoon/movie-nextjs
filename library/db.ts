@@ -1,44 +1,102 @@
 const movieUrl = "https://api.themoviedb.org/3"
 
 export const fetchData = async (url: string) => {
-    console.log("URL", url)
+
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_MOVIE_DB_URL}/${url}`, {
             method: "GET",
             headers: {
                 accept: 'application/json',
-                Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTHORIZATION}`
+                authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTHORIZATION}`
             }
         });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+        // console.log("fetchdata response", response)
+        // if (!response.ok) {
+        //     throw new Error('Network response was not ok');
+        // }
 
         return response.json();
     } catch (error) {
         console.error('Error fetching data:', error);
-        throw error; // Rethrow the error to be caught by the caller
+        throw error;
     }
 }
 
-export const fetchResults = async (url:string) => {
+export const postData = async (url: string, data: {}) => {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_MOVIE_DB_URL}${url}`, {
-        method: "GET",
-        headers: {
-            accept: 'application/json',
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTHORIZATION}`
-        }
-    })
+            method: "POST",
+            headers: {
+                accept: 'application/json',
+                'content-type': 'application/json',
+                Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTHORIZATION}`
+            },
+            body: JSON.stringify(data)
+        });
 
-    const formatResponse = await response.json()
-    const results = formatResponse.results
-    return results
-
-    return formatResponse.results
+        return response.json();
     } catch (error) {
         console.error('Error fetching data:', error);
-        throw error; 
+        throw error;
+    }
+}
+
+export const getFetchApi = async (url: string) => {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_MOVIE_DB_URL}${url}?api_key=26159e133fce51f3b8355cc25e0c2ff4`, {
+            method: "GET",
+            headers: {
+                accept: 'application/json',
+                
+            }
+        });
+        // console.log("fetchdata response", response)
+        // if (!response.ok) {
+        //     throw new Error('Network response was not ok');
+        // }
+
+        return response.json();
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+}
+
+export const postFetchApi = async (url: string, data: {}) => {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_MOVIE_DB_URL}${url}?api_key=26159e133fce51f3b8355cc25e0c2ff4`, {
+            method: "POST",
+            headers: {
+                accept: 'application/json',
+                'Content-Type': 'application/json',
+                api_key: `26159e133fce51f3b8355cc25e0c2ff4`
+            },
+            body: JSON.stringify(data)
+        });
+
+        return response.json();
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+}
+
+
+export const fetchResults = async (url: string) => {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_MOVIE_DB_URL}${url}`, {
+            method: "GET",
+            headers: {
+                accept: 'application/json',
+                Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTHORIZATION}`
+            }
+        })
+
+        const formatResponse = await response.json()
+        const results = formatResponse.results
+        return results
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
     }
 }

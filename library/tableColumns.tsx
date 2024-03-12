@@ -5,6 +5,13 @@ import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { MovieCastDetails, MovieCrewDetails } from "./modals"
 import { formatDate, roundNumber } from "@/utils/format"
 import Link from "next/link"
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/components/ui/hover-card"
+import { imageUrl } from "./url"
+import Image from "next/image"
 
 
 export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
@@ -43,10 +50,20 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
         cell: ({row}) => {
             const title: string = row.getValue("title")
             const movieId = row.original.id
+            const overview = row.original.overview
+            const posterUrl = row.original.poster_path
             return (
-                <Link href={`/movie/details/${movieId}`} className="hover:underline ">
-                    {title}
-                </Link>
+                <HoverCard>
+                    <HoverCardTrigger>
+                        <Link href={`/movie/details/${movieId}`} className="hover:underline ">
+                            {title}
+                        </Link>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="">
+                        <p className="text-sm">{overview}</p>
+                        <Image src={`${imageUrl}${posterUrl}`} alt={title} width={100} height={150}/>
+                    </HoverCardContent>
+                </HoverCard>
             )
         }
     },
@@ -130,10 +147,20 @@ export const CrewColumns: ColumnDef<MovieCrewDetails, any>[] = [
         cell: ({row}) => {
             const title: string = row.getValue("title")
             const movieId = row.original.id
+            const overview = row.original.overview
+            const posterUrl = row.original.poster_path
             return (
-                <Link href={`/movie/details/${movieId}`}>
-                    {title}
-                </Link>
+                <HoverCard>
+                    <HoverCardTrigger>
+                        <Link href={`/movie/details/${movieId}`} className="hover:underline ">
+                            {title}
+                        </Link>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="">
+                        <p className="text-sm">{overview}</p>
+                        <Image src={`${imageUrl}${posterUrl}`} alt={title} width={100} height={150}/>
+                    </HoverCardContent>
+                </HoverCard>
             )
         }
     },

@@ -8,10 +8,12 @@ import { Card } from "@/components/ui/card"
 import Link from 'next/link';
 import Eyes from './icons/Eye';
 import Heart from './icons/Heart';
-import { toast } from 'sonner';
+import { useToast } from './ui/use-toast';
 import Ellipsis from './icons/Ellipsis';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuLabel } from './ui/dropdown-menu';
 import DefaultPoster from './DefaultPoster';
+import { useSession } from 'next-auth/react';
+import { postData, postFetchApi } from '@/library/db';
 
 
 type PosterProps = {
@@ -24,7 +26,9 @@ type PosterProps = {
 }
 
 const PosterCard = ({ details, className, width, height, sizes, pointerEvent = true }: PosterProps) => {
-
+    const session = useSession()
+    // console.log(session)
+    const {toast} = useToast()
     const [isLoading, setIsLoading] = useState(true)
     const [showHover, setShowHover] = useState(false)
     const ellipsisRef = useRef<HTMLDivElement>(null)
@@ -43,12 +47,37 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
     
     }
 
-    const handleWatchlistIcon = () => {
-        toast(`Added '${details.title}' to your watchlist.`)
+    const handleWatchlistIcon = async () => {
+        if (session.status === "authenticated") {
+            const postWatchlist = await postFetchApi(`/account/${session.data.user?.id}/watchlist?session_id=${session.data.user.sessionId}`, {
+                media_type: "movie",
+                media_id: details.id,
+                watchlist: true
+            })
+            if (postWatchlist.success) {
+                toast({description: `Added '${details.title}' to your watchlist.`})
+            }
+
+        } else {
+            toast({
+                title: "Log in Required",
+                variant: "destructive", 
+                description: 'You must be logged in to add films to the your watchlist.'
+            })
+        }
     }
 
-    const handleLikeIcon = () => {
-        toast(`Added '${details.title}' to your Like list.`)
+    const handleLikeIcon = async () => {
+        if (session.status === "authenticated") {
+            toast({description: `Added '${details.title}' to your Like list.`})
+
+        } else {
+            toast({
+                title: "Log in Required",
+                variant: "destructive", 
+                description: 'You must be logged in to add films to the your like list.'
+            })
+        }
     }
 
 
