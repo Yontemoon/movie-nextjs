@@ -69,7 +69,10 @@ export const postFetchApi = async (url: string, data: {}) => {
             headers: {
                 accept: 'application/json',
                 'Content-Type': 'application/json',
-                api_key: `26159e133fce51f3b8355cc25e0c2ff4`
+                // api_key: `26159e133fce51f3b8355cc25e0c2ff4`,
+                // "Access-Control-Allow-Origin": "*",
+                // "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+                // "Access-Control-Allow-Headers": "Content-Type, Authorization"
             },
             body: JSON.stringify(data)
         });

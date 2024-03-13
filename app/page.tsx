@@ -3,7 +3,8 @@ import { fetchData } from "@/library/db";
 import CarousalDefault from "@/components/CarousalDefault";
 
 export default async function Home() {
-
+  const data = await fetchData("/api/watchlist")
+  console.log(data)
   const popular = await fetchData("/movie/popular?language=en-US&page=1&region=US").then((response)=> {
     return response.results
   })

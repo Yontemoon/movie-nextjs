@@ -6,14 +6,24 @@ import { fetchData, postData, getFetchApi, postFetchApi } from "./db"
 
 export const authConfig: NextAuthOptions = {
     callbacks: {
-        session: async ({session, token}) => {
-            // console.log("session", session)
-            // console.log("token", token)
+        session: async ({session, token,user}) => {
+            
+            // console.log({user})
             if (session.user) {
                 session.user.id = token.sub as string
-                session.user.sessionId = token.jti as string
+                session.user.sessionId = token.sessionId as string
             }
             return session
+        },
+        jwt: async ({token, account, profile, user }) => {
+           
+            if (user && "sessionId" in user) {
+                return {
+                    ...token,
+                    sessionId: user.sessionId
+                }
+            }
+            return token
         }
     },
     providers: [
@@ -33,18 +43,9 @@ export const authConfig: NextAuthOptions = {
                 if (!credentials || !credentials?.username || !credentials?.password) {
                     return null
                 }
-                // const accountDetails = await fetchData(`/account?session_id=${credentials.username}`)
-                // console.log(accountDetails)
-                // return {
-                //     name: accountDetails.username,
-                //     image: accountDetails.avatar,
-                //     id: accountDetails.id
-                // }
+               
                 const token = await getFetchApi(`/authentication/token/new`)
-                console.log(token)
-                console.log("username", credentials.username)
-                console.log("password", credentials.password)
-
+            
                 if (token.success) {
                     //Validates the token.
                     console.log("token success")
@@ -66,8 +67,8 @@ export const authConfig: NextAuthOptions = {
                             return {
                                 name: accountDetails.username,
                                 id: accountDetails.id,
-                                image: accountDetails.avatar.
-                                session_id,
+                                image: accountDetails.avatar,
+                                sessionId: session.session_id,
                                 
                             }
 

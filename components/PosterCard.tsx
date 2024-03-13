@@ -48,13 +48,16 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
     }
 
     const handleWatchlistIcon = async () => {
+       
         if (session.status === "authenticated") {
-            const postWatchlist = await postFetchApi(`/account/${session.data.user?.id}/watchlist?session_id=${session.data.user.sessionId}`, {
-                media_type: "movie",
-                media_id: details.id,
-                watchlist: true
+            
+            const request = await fetch(`http://localhost:3000/api/watchlist/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`,{
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
             })
-            if (postWatchlist.success) {
+            if (request.status === 200) {
                 toast({description: `Added '${details.title}' to your watchlist.`})
             }
 
@@ -102,7 +105,7 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
                         ${className} 
                         ${showHover ? 'opacity-50' : ''}
                         ${isLoading ? " blur-lg " : " blur-0 "}`}
-                    onLoadingComplete={() => setIsLoading(false)}
+                    onLoad={() => setIsLoading(false)}
                     priority
                     quality={50}
                     

@@ -13,14 +13,14 @@ const CredentialsForm = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     const onSubmit = async (data: any) => {
-        console.log(data)
+        // console.log(data)
         const signinResponse = await signIn("credentials", {
             username: data.username,
             password: data.password,
             redirect: false
         })
-        console.log("signinResponse", signinResponse)
-        // if (signinResponse.ok) {
+        // console.log("signinResponse", signinResponse)
+        // // if (signinResponse.ok) {
         router.push("/")
         // }
 
