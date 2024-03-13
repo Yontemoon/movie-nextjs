@@ -51,7 +51,7 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
        
         if (session.status === "authenticated") {
             
-            const request = await fetch(`http://localhost:3000/api/watchlist/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`,{
+            const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/watchlist/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`,{
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
