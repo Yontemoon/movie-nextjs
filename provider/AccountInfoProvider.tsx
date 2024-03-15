@@ -25,7 +25,7 @@ const AccountInfoProvider = ({children}: {children: React.ReactNode}) => {
     useEffect(() => {
         const getWatchlist = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/${session.data?.user.id}/${session.data?.user.sessionId}`)
+                const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/watchlist/${session.data?.user.id}/${session.data?.user.sessionId}`)
                 console.log("response", response)
                 // if (!response.ok) {
                 //     throw new Error("Failed to fetch watchlist data");
