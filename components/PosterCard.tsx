@@ -42,7 +42,7 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
         if (session.status === 'authenticated' && watchlist) {
             setInWatchlist(watchlist?.some((movie) => movie.id === details.id));
         }
-    },[session.status, watchlist])
+    },[session.status, watchlist, details.id])
 
     const handleMouseEnter = () => {
         setShowHover(true)
