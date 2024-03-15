@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/carousel"
 import Link from 'next/link';
 import PosterCard from './PosterCard';
+import { PosterCardType } from '@/library/modals';
 
 
 type NowPlayingTypes = {

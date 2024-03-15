@@ -16,6 +16,13 @@ export type MovieDetailsType = {
     tagline: string
 }
 
+export type PosterCardType = {
+    id: number;
+    watched: boolean;
+    poster_path: string;
+    title: string
+}
+
 export type PersonDetailsType = {
     biography: string;
     imdb_id: string;

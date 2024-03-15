@@ -1,12 +1,12 @@
 "use client"
 
-import { MoviePosterType, MovieDetailsType } from '@/library/modals';
+import { MoviePosterType, MovieDetailsType, PosterCardType } from '@/library/modals';
 import Image from 'next/image';
 import { imageUrl } from '@/library/url';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Card } from "@/components/ui/card"
 import Link from 'next/link';
-import Eyes from './icons/Eye';
+import Eye from './icons/Eye';
 import Heart from './icons/Heart';
 import { useToast } from './ui/use-toast';
 import Ellipsis from './icons/Ellipsis';
@@ -14,24 +14,35 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuLab
 import DefaultPoster from './DefaultPoster';
 import { useSession } from 'next-auth/react';
 import { postData, postFetchApi } from '@/library/db';
-
+import { watch } from 'fs';
+import { KeyedMutator } from 'swr';
+import { useAccountInfoContext } from '@/provider/AccountInfoProvider';
+import { removeFromList, addToList } from '@/library/crud';
 
 type PosterProps = {
-    details: MovieDetailsType | MoviePosterType
+    details: MovieDetailsType 
     className?: string
     width: number
     height: number;
     sizes?: string;
     pointerEvent?: boolean
+    mutate?: any
 }
 
-const PosterCard = ({ details, className, width, height, sizes, pointerEvent = true }: PosterProps) => {
+const PosterCard = ({ details, className, width, height, sizes, pointerEvent = true, mutate }: PosterProps) => {
     const session = useSession()
-    // console.log(session)
-    const {toast} = useToast()
+    const { toast } = useToast()
+    const {watchlist, setWatchlist} = useAccountInfoContext()
     const [isLoading, setIsLoading] = useState(true)
     const [showHover, setShowHover] = useState(false)
+    const [inWatchlist, setInWatchlist] = useState(false)
     const ellipsisRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (session.status === 'authenticated' && watchlist) {
+            setInWatchlist(watchlist?.some((movie) => movie.id === details.id));
+        }
+    },[session.status, watchlist])
 
     const handleMouseEnter = () => {
         setShowHover(true)
@@ -44,27 +55,50 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
             setShowHover(false)
 
         }
-    
     }
 
+
     const handleWatchlistIcon = async () => {
-       
         if (session.status === "authenticated") {
-            
-            const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/watchlist/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`,{
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-            if (request.status === 200) {
-                toast({description: `Added '${details.title}' to your watchlist.`})
+            if (inWatchlist) {
+                const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/watchlist/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+                if (request.status === 200) {
+                    // setInWatchlist(!inWatchlist)
+                    if(watchlist) {
+                        setWatchlist(removeFromList(watchlist, details.id))
+                        setInWatchlist(false)
+
+                    }
+                    // mutate()
+                    toast({ description: `Removed '${details.title}' in your watchlist.` })
+                }
+            } else {
+                const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/watchlist/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+                if (request.status === 200) {
+                    if (watchlist !== undefined && watchlist !== null) {
+                        setWatchlist(addToList(watchlist, details))
+                        setInWatchlist(true)
+                    }
+                    // setInWatchlist(!inWatchlist)
+                    toast({ description: `Added '${details.title}' to your watchlist.` })
+                }
             }
+            
 
         } else {
             toast({
                 title: "Log in Required",
-                variant: "destructive", 
+                variant: "destructive",
                 description: 'You must be logged in to add films to the your watchlist.'
             })
         }
@@ -72,72 +106,88 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
 
     const handleLikeIcon = async () => {
         if (session.status === "authenticated") {
-            toast({description: `Added '${details.title}' to your Like list.`})
 
+            const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/favorites/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+
+            if (request.status === 200) {
+                toast({ description: `Added '${details.title}' to your favorite list.` })
+            }
         } else {
             toast({
                 title: "Log in Required",
-                variant: "destructive", 
-                description: 'You must be logged in to add films to the your like list.'
+                variant: "destructive",
+                description: 'You must be logged in to add films to the your favorite list.'
             })
         }
     }
 
 
+    // useEffect(() => {
+    //     console.log(inWatchlist)
+    // })
+
     return (
         <DropdownMenu>
-        <div className='relative'
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
-            <Link href={`/movie/details/${details.id}`} className={pointerEvent ? `` : `pointer-events-none`}>
-                {details.poster_path === null ? <DefaultPoster movieTitle={`${details.title}`}/> :
-                <Image
+            <div className='relative'
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+            >
+                <Link href={`/movie/details/${details.id}`} className={pointerEvent ? `` : `pointer-events-none`}>
+                    {details.poster_path === null ? <DefaultPoster movieTitle={`${details.title}`} /> :
+                        <Image
 
-                    src={`${imageUrl}${details.poster_path}`}
-                    alt={`${details.id}`}
-                    width={width}
-                    height={height}
-                    sizes={sizes}
-                    className=
-                        {`w-full h-auto border-white transition-all rounded-md 
+                            src={`${imageUrl}${details.poster_path}`}
+                            alt={`${details.id}`}
+                            width={width}
+                            height={height}
+                            sizes={sizes}
+                            className=
+                            {`w-full h-auto border-white transition-all rounded-md 
                         shadow-2xl hover:border-slate-500 duration-300 cursor-pointer 
                         ${className} 
                         ${showHover ? 'opacity-50' : ''}
                         ${isLoading ? " blur-lg " : " blur-0 "}`}
-                    onLoad={() => setIsLoading(false)}
-                    priority
-                    quality={50}
-                    
-                    
-                />}
-            </Link>
-            {showHover && (
-                <>
-                <Card className='absolute bottom-3 inset-x-3 transition-opacity duration-700 z-10'>
-                    
-                    {/* <h2>{details.title}</h2> */}
-                    <div className='flex justify-center gap-3'>
-                        <Eyes onClick={handleWatchlistIcon}/>
-                        <Heart onClick={handleLikeIcon}/>
-                        <DropdownMenuTrigger >
-                            <Ellipsis/>
-                        </DropdownMenuTrigger>
+                            onLoad={() => setIsLoading(false)}
+                            priority
+                            quality={50}
 
-                    </div>
-                    <DropdownMenuContent ref={ellipsisRef}>
-                <DropdownMenuLabel>
-                    {details.title}
-                </DropdownMenuLabel>
-            </DropdownMenuContent>
-                    
-                </Card>
 
-            </>
-            )}
-            
-        </div>
-            </DropdownMenu>
+                        />}
+                </Link>
+                {showHover && (
+                    <>
+                        <Card className='absolute bottom-3 inset-x-3 transition-opacity duration-700 z-10'>
+                        
+                            <div className='flex justify-center gap-3'>
+                                {/* <form action={handleWatchlistIcon}> */}
+                                    {/* <Eyes onClick={handleWatchlistIcon}/> */}
+                                   <div onClick={handleWatchlistIcon} className='hover:cursor-pointer'>
+                                    {inWatchlist ? <Eye watched={true}/> : <Eye/> }
+                                    </div> 
+                                {/* </form> */}
+                                <Heart onClick={handleLikeIcon} />
+                                <DropdownMenuTrigger >
+                                    <Ellipsis />
+                                </DropdownMenuTrigger>
+                            </div>
+                            <DropdownMenuContent ref={ellipsisRef}>
+                                <DropdownMenuLabel>
+                                    {details.title}
+                                </DropdownMenuLabel>
+                            </DropdownMenuContent>
+
+                        </Card>
+
+                    </>
+                )}
+
+            </div>
+        </DropdownMenu>
     );
 };
 

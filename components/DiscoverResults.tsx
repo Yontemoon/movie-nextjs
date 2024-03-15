@@ -1,6 +1,6 @@
 "use server"
 
-import { MovieDetailsType } from '@/library/modals';
+import { MovieDetailsType, PosterCardType } from '@/library/modals';
 import React from 'react';
 import { fetchData } from '@/library/db';
 

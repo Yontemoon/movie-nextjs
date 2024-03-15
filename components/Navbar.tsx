@@ -20,8 +20,7 @@ import {
 
 const Navbar = () => {
     const session = useSession()
-    console.log(session)    
-    
+    // console.log(session)
     const handleLogout = () => {
         signOut()
     }

@@ -21,8 +21,11 @@ const MovieDetailsPage = async ({params}: paramsProp) => {
     return (
         <>
             <MovieInfo details={movieDetails} movieCredits={movieCredits}/>
-            <MovieRecommendations movieRecommendations={movieRecommendations}/>
-            
+            {/* <MovieRecommendations movieRecommendations={movieRecommendations}/>
+             */}
+            <MovieRecommendations movieRecommendations={movieRecommendations.results}/>
+
+
         </>
     );
 };

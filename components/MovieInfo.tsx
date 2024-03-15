@@ -1,4 +1,4 @@
-"use server"
+"use client"
 
 import React from 'react';
 import { MovieDetailsType, PersonCreditDetailsType } from '@/library/modals';
@@ -16,6 +16,8 @@ type MovieInfoProps = {
 }
 
 const MovieInfo = ({ details, movieCredits }: MovieInfoProps) => {
+
+    // const { data, mutate }: swrType = useSWR(`/api/recommendations/${session?.data?.user.id}/${session.data?.user.sessionId}/${movieId}`, fetcher)
     return (
         <>
             <MovieInfoBackdrop details={details}/>

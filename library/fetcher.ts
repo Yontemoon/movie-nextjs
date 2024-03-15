@@ -1,0 +1,1 @@
+export const fetcher = (url: string) => fetch(`${process.env.NEXT_PUBLIC_URL}${url}`,{ cache: 'no-store' }).then((res) => res.json());
