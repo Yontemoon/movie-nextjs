@@ -54,11 +54,10 @@ export const DELETE = async (request: NextRequest, {params}: {params: {accountId
                 favorite: false
             })
         })
-        
-        if (postRequest.status === 201) {
-            return Response.json({status: 200})
+    
+        return Response.json(postRequest)
         }
-    } catch (error) {
+    catch (error) {
         console.log(error)
 
     }

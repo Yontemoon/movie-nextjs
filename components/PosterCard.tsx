@@ -32,17 +32,19 @@ type PosterProps = {
 const PosterCard = ({ details, className, width, height, sizes, pointerEvent = true, mutate }: PosterProps) => {
     const session = useSession()
     const { toast } = useToast()
-    const {watchlist, setWatchlist} = useAccountInfoContext()
+    const {watchlist, setWatchlist, favorites, setFavorites} = useAccountInfoContext()
     const [isLoading, setIsLoading] = useState(true)
     const [showHover, setShowHover] = useState(false)
     const [inWatchlist, setInWatchlist] = useState(false)
+    const [inFavorite, setInfavorite] = useState(false)
     const ellipsisRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (session.status === 'authenticated' && watchlist) {
+        if (session.status === 'authenticated' && watchlist && favorites) {
             setInWatchlist(watchlist?.some((movie) => movie.id === details.id));
+            setInfavorite(favorites?.some((movie) => movie.id === details.id))
         }
-    },[session.status, watchlist, details.id])
+    },[session.status, watchlist, details.id, favorites])
 
     const handleMouseEnter = () => {
         setShowHover(true)
@@ -104,18 +106,40 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
         }
     }
 
-    const handleLikeIcon = async () => {
+    const handleFavoriteIcon = async () => {
         if (session.status === "authenticated") {
+            if (inFavorite) {
+                const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/favorites/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+                if (request.status === 200) {
+                    
+                    if(favorites) {
+                        setFavorites(removeFromList(favorites, details.id))
+                        setInfavorite(false)
 
-            const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/favorites/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`, {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-
-            if (request.status === 200) {
-                toast({ description: `Added '${details.title}' to your favorite list.` })
+                    }
+                    // mutate()
+                    toast({ description: `Removed '${details.title}' in your favorites.` })
+                }
+            } else {
+                const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/favorites/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+                if (request.status === 200) {
+                    if (favorites !== undefined && favorites !== null) {
+                        setFavorites(addToList(favorites, details))
+                        setInfavorite(true)
+                    }
+                    
+                    toast({ description: `Added '${details.title}' to your favorites.` })
+                }
             }
         } else {
             toast({
@@ -170,7 +194,10 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
                                     {inWatchlist ? <Eye watched={true}/> : <Eye/> }
                                     </div> 
                                 {/* </form> */}
-                                <Heart onClick={handleLikeIcon} />
+                                <div onClick={handleFavoriteIcon} className='hover:cursor-pointer'>
+                                    {inFavorite ? <Heart watched={true}/>: <Heart/>}
+                                </div>
+                                {/* <Heart onClick={handleLikeIcon} /> */}
                                 <DropdownMenuTrigger >
                                     <Ellipsis />
                                 </DropdownMenuTrigger>

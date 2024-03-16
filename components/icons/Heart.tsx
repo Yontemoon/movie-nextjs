@@ -1,11 +1,11 @@
 import * as React from "react"
 import { SVGProps } from "react"
-const Heart = (props: SVGProps<SVGSVGElement>) => (
+const Heart = ({watched = false}, props: SVGProps<SVGSVGElement>) => (
   <svg
     className="hover:cursor-pointer"
     xmlns="http://www.w3.org/2000/svg"
     width={28}
-    fill="currentColor"
+    fill={watched ? "#17C3B2" : "currentColor"}
     viewBox="-2 -4 24 24"
     {...props}
   >
