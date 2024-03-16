@@ -5,7 +5,7 @@ const Eye = ({watched = false}, props: SVGProps<SVGSVGElement>) => (
     className="hover:cursor-pointer"
     xmlns="http://www.w3.org/2000/svg"
     width={28}
-    fill={watched ? "#FF784F":"currentColor"}
+    fill={watched ? "#721817":"currentColor"}
     viewBox="-2 -6 24 24"
     {...props}
   >

@@ -16,6 +16,10 @@ export type MovieDetailsType = {
     tagline: string
 }
 
+export type RatedType = MovieDetailsType & {
+    rated: number
+}
+
 export type PosterCardType = {
     id: number;
     watched: boolean;

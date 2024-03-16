@@ -13,11 +13,10 @@ import Ellipsis from './icons/Ellipsis';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuLabel } from './ui/dropdown-menu';
 import DefaultPoster from './DefaultPoster';
 import { useSession } from 'next-auth/react';
-import { postData, postFetchApi } from '@/library/db';
-import { watch } from 'fs';
-import { KeyedMutator } from 'swr';
 import { useAccountInfoContext } from '@/provider/AccountInfoProvider';
 import { removeFromList, addToList } from '@/library/crud';
+import StarRating from './StarRating';
+import Star from './icons/Star';
 
 type PosterProps = {
     details: MovieDetailsType 
@@ -26,25 +25,26 @@ type PosterProps = {
     height: number;
     sizes?: string;
     pointerEvent?: boolean
-    mutate?: any
 }
 
-const PosterCard = ({ details, className, width, height, sizes, pointerEvent = true, mutate }: PosterProps) => {
+const PosterCard = ({ details, className, width, height, sizes, pointerEvent = true,  }: PosterProps) => {
     const session = useSession()
     const { toast } = useToast()
-    const {watchlist, setWatchlist, favorites, setFavorites} = useAccountInfoContext()
+    const {watchlist, setWatchlist, favorites, setFavorites, rated, setRated} = useAccountInfoContext()
     const [isLoading, setIsLoading] = useState(true)
     const [showHover, setShowHover] = useState(false)
     const [inWatchlist, setInWatchlist] = useState(false)
     const [inFavorite, setInfavorite] = useState(false)
+    const [inRated, setInRated] = useState(false)
     const ellipsisRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (session.status === 'authenticated' && watchlist && favorites) {
+        if (session.status === 'authenticated' && watchlist && favorites && rated) {
             setInWatchlist(watchlist?.some((movie) => movie.id === details.id));
             setInfavorite(favorites?.some((movie) => movie.id === details.id))
+            setInRated(rated?.some((movie) => movie.id === details.id))
         }
-    },[session.status, watchlist, details.id, favorites])
+    },[session.status, watchlist, details.id, favorites, rated])
 
     const handleMouseEnter = () => {
         setShowHover(true)
@@ -164,24 +164,25 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
                 <Link href={`/movie/details/${details.id}`} className={pointerEvent ? `` : `pointer-events-none`}>
                     {details.poster_path === null ? <DefaultPoster movieTitle={`${details.title}`} /> :
                         <Image
-
                             src={`${imageUrl}${details.poster_path}`}
                             alt={`${details.id}`}
                             width={width}
                             height={height}
                             sizes={sizes}
                             className=
-                            {`w-full h-auto border-white transition-all rounded-md 
-                        shadow-2xl hover:border-slate-500 duration-300 cursor-pointer 
-                        ${className} 
-                        ${showHover ? 'opacity-50' : ''}
-                        ${isLoading ? " blur-lg " : " blur-0 "}`}
+                            {`
+                                w-full h-auto border-black border-4 transition-all rounded-md 
+                                shadow-2xl hover:border-slate-500 duration-300 cursor-pointer 
+                                ${className} 
+                                ${showHover ? 'opacity-50' : ''}
+                                ${isLoading ? " blur-lg " : " blur-0 "}
+                                ${inFavorite ? "hover:border-[#0B6E4F]" : ""}
+                            `}
                             onLoad={() => setIsLoading(false)}
                             priority
                             quality={50}
-
-
-                        />}
+                        />
+                    }
                 </Link>
                 {showHover && (
                     <>
@@ -199,12 +200,12 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
                                 </div>
                                 {/* <Heart onClick={handleLikeIcon} /> */}
                                 <DropdownMenuTrigger >
-                                    <Ellipsis />
+                                    {inRated ? <Star watched={true}/> : <Star/>}
                                 </DropdownMenuTrigger>
                             </div>
                             <DropdownMenuContent ref={ellipsisRef}>
                                 <DropdownMenuLabel>
-                                    {details.title}
+                                    <StarRating/>
                                 </DropdownMenuLabel>
                             </DropdownMenuContent>
 

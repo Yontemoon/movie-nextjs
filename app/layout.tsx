@@ -31,7 +31,7 @@ export default async function RootLayout({
     <html lang="en">
       <NextSessionProvider>
         <AccountInfoProvider>
-          <body className={`${inter.className} bg-slate-700`}>
+          <body className={`${inter.className} bg-[#0D3B66]`}>
             <div className="w-screen overflow-x-hidden flex flex-col ">
               <Navbar />
               <div className="flex flex-col justify-center items-center content-center self-center text-white container">

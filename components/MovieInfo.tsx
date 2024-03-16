@@ -9,6 +9,7 @@ import Link from 'next/link';
 import AvatarCarousal from './AvatarCarousal';
 import MovieInfoPoster from './MovieInfoPoster';
 import MovieInfoBackdrop from './MovieInfoBackdrop';
+import StarRating from './StarRating';
 
 type MovieInfoProps = {
     details: MovieDetailsType;
@@ -30,6 +31,7 @@ const MovieInfo = ({ details, movieCredits }: MovieInfoProps) => {
                         <Link href={`/discover?year=${getYear(details.release_date)}&page=1`}>
                             <h2>{getYear(details.release_date)}</h2>
                         </Link>
+                        
                     </div>
                     <div>
                         <p>{details.tagline}</p>

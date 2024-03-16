@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect,useMemo } from "react";
 import { useSession } from "next-auth/react";
-import { MovieDetailsType } from "@/library/modals";
+import { MovieDetailsType, RatedType } from "@/library/modals";
 
 
 type AccountContextType = {
@@ -10,13 +10,17 @@ type AccountContextType = {
     setWatchlist: React.Dispatch<React.SetStateAction<MovieDetailsType[] | null>>;
     favorites: MovieDetailsType[] | null;
     setFavorites: React.Dispatch<React.SetStateAction<MovieDetailsType[] | null>>;
+    rated: RatedType[] | null;
+    setRated: React.Dispatch<React.SetStateAction<RatedType[] | null>>
+
+
 }
 
 export const AccountInfoContext = createContext<AccountContextType>({} as AccountContextType);
 
 export const useAccountInfoContext = () => {
-    const {watchlist, setWatchlist, favorites, setFavorites} = useContext(AccountInfoContext)
-    return {watchlist, setWatchlist, favorites, setFavorites}
+    const {watchlist, setWatchlist, favorites, setFavorites, rated, setRated} = useContext(AccountInfoContext)
+    return {watchlist, setWatchlist, favorites, setFavorites, rated, setRated}
 }
 
 const AccountInfoProvider = ({children}: {children: React.ReactNode}) => {
@@ -24,6 +28,7 @@ const AccountInfoProvider = ({children}: {children: React.ReactNode}) => {
     const session = useSession()
     const [watchlist, setWatchlist] = useState<MovieDetailsType[] | null>(null)
     const [favorites, setFavorites] = useState<MovieDetailsType[] | null>(null)
+    const [rated, setRated] = useState<RatedType[] | null>(null)
 
     useEffect(() => {
         const getWatchlist = async () => {
@@ -55,13 +60,29 @@ const AccountInfoProvider = ({children}: {children: React.ReactNode}) => {
                 console.error("Error fetching watchlist:", error);
             }
         }
+
+        const getRated = async () => {
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/rating/${session.data?.user.sessionId}/get/${session.data?.user.id}`, { cache: 'no-store' })
+                // console.log("response", response)
+                // if (!response.ok) {
+                //     throw new Error("Failed to fetch watchlist data");
+                // }
+                const data = await response.json();
+                console.log("RATED IN PROVIDER", data)
+                setRated(data);
+            } catch (error) {
+                console.error("Error fetching watchlist:", error);
+            }
+        }
         if (session.data?.user.id && session.data?.user.sessionId) {
             getWatchlist();
             getFavorites()
+            getRated()
         }
     }, [session])
 
-    const contextValue = useMemo(() => ({ watchlist, setWatchlist, favorites, setFavorites }), [watchlist, setWatchlist, favorites, setFavorites]);
+    const contextValue = useMemo(() => ({ watchlist, setWatchlist, favorites, setFavorites, rated, setRated }), [watchlist, setWatchlist, favorites, setFavorites, rated, setRated]);
 
     return (
         <AccountInfoContext.Provider value={contextValue}>
