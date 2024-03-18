@@ -34,12 +34,12 @@ const AccountInfoProvider = ({children}: {children: React.ReactNode}) => {
         const getWatchlist = async () => {
             try {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/watchlist/${session.data?.user.id}/${session.data?.user.sessionId}`, { cache: 'no-store' })
-                console.log("response", response)
+                
                 // if (!response.ok) {
                 //     throw new Error("Failed to fetch watchlist data");
                 // }
                 const data = await response.json();
-                console.log("WATCHLIST IN PROVIDER", data)
+                
                 setWatchlist(data);
             } catch (error) {
                 console.error("Error fetching watchlist:", error);
@@ -54,7 +54,7 @@ const AccountInfoProvider = ({children}: {children: React.ReactNode}) => {
                 //     throw new Error("Failed to fetch watchlist data");
                 // }
                 const data = await response.json();
-                console.log("FAVORITES IN PROVIDER", data)
+                
                 setFavorites(data);
             } catch (error) {
                 console.error("Error fetching watchlist:", error);
@@ -69,7 +69,7 @@ const AccountInfoProvider = ({children}: {children: React.ReactNode}) => {
                 //     throw new Error("Failed to fetch watchlist data");
                 // }
                 const data = await response.json();
-                console.log("RATED IN PROVIDER", data)
+                
                 setRated(data);
             } catch (error) {
                 console.error("Error fetching watchlist:", error);

@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { MovieDetailsType } from "@/library/modals"
 import { fetchData } from "@/library/db"
 
@@ -50,7 +50,7 @@ export const DELETE = async (request: NextRequest, { params }: { params: { accou
             })
         })
         console.log(postRequest)
-        return Response.json(postRequest)
+        return Response.json({message: `Movie ID ${movieId} successful`}, {status: 200})
     } catch (error) {
         console.log(error)
 

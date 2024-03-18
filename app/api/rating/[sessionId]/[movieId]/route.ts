@@ -2,7 +2,7 @@ import { NextRequest } from "next/server"
 
 export const POST = async (request: NextRequest, { params }: { params: { sessionId: string, movieId: string } }) => {
     try {
-        const {value} = await request.json()
+        const {rating} = await request.json()
         const sessionId = params.sessionId
         const movieId = params.movieId
 
@@ -14,11 +14,11 @@ export const POST = async (request: NextRequest, { params }: { params: { session
 
             },
             body: JSON.stringify({
-                value: value
+                value: rating
             })
         })
-        console.log(postRequest)
-        if (postRequest.status === 201) {
+        const response = await postRequest.json()
+        if (response.success) {
             return Response.json({ status: 200 })
         }
     } catch (error) {
@@ -40,7 +40,7 @@ export const DELETE = async (request: NextRequest, { params }: { params: { sessi
                 Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNjE1OWUxMzNmY2U1MWYzYjgzNTVjYzI1ZTBjMmZmNCIsInN1YiI6IjU0YmU2ZTE3YzNhMzY4NmM2MTAwY2I0ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.EwXgaHVl28xvznKNf7di1MaK1J5LMZ0uygw4cADqLTU'
             },
         })
-        console.log(postRequest)
+        
         return Response.json(postRequest)
     } catch (error) {
         console.log(error)

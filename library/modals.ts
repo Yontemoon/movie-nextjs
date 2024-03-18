@@ -17,7 +17,7 @@ export type MovieDetailsType = {
 }
 
 export type RatedType = MovieDetailsType & {
-    rated: number
+    rating: number
 }
 
 export type PosterCardType = {

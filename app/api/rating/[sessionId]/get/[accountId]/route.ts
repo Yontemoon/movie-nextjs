@@ -23,7 +23,7 @@ export const GET = async (request: NextRequest, { params }: { params: { accountI
                 totalPages = fetchedWatchlist.total_pages
             }
         }
-        console.log(rated)
+        // console.log(rated)
         return Response.json(rated)
     } catch (error) {
         console.error(error)

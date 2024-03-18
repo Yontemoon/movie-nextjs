@@ -17,9 +17,12 @@ import { useAccountInfoContext } from '@/provider/AccountInfoProvider';
 import { removeFromList, addToList } from '@/library/crud';
 import StarRating from './StarRating';
 import Star from './icons/Star';
+import FavoriteIcon from './FavoriteIcon';
+import WatchlistIcon from './WatchlistIcon';
+import RatedIcon from './RatedIcon';
 
 type PosterProps = {
-    details: MovieDetailsType 
+    details: MovieDetailsType
     className?: string
     width: number
     height: number;
@@ -27,10 +30,9 @@ type PosterProps = {
     pointerEvent?: boolean
 }
 
-const PosterCard = ({ details, className, width, height, sizes, pointerEvent = true,  }: PosterProps) => {
+const PosterCard = ({ details, className, width, height, sizes, pointerEvent = true, }: PosterProps) => {
     const session = useSession()
-    const { toast } = useToast()
-    const {watchlist, setWatchlist, favorites, setFavorites, rated, setRated} = useAccountInfoContext()
+    const { watchlist, favorites, rated } = useAccountInfoContext()
     const [isLoading, setIsLoading] = useState(true)
     const [showHover, setShowHover] = useState(false)
     const [inWatchlist, setInWatchlist] = useState(false)
@@ -39,12 +41,13 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
     const ellipsisRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
+        // console.log("its passing here");
         if (session.status === 'authenticated' && watchlist && favorites && rated) {
             setInWatchlist(watchlist?.some((movie) => movie.id === details.id));
             setInfavorite(favorites?.some((movie) => movie.id === details.id))
             setInRated(rated?.some((movie) => movie.id === details.id))
         }
-    },[session.status, watchlist, details.id, favorites, rated])
+    }, [session.status, watchlist, details.id, favorites, rated])
 
     const handleMouseEnter = () => {
         setShowHover(true)
@@ -58,102 +61,6 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
 
         }
     }
-
-
-    const handleWatchlistIcon = async () => {
-        if (session.status === "authenticated") {
-            if (inWatchlist) {
-                const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/watchlist/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`, {
-                    method: 'DELETE',
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
-                if (request.status === 200) {
-                    // setInWatchlist(!inWatchlist)
-                    if(watchlist) {
-                        setWatchlist(removeFromList(watchlist, details.id))
-                        setInWatchlist(false)
-
-                    }
-                    // mutate()
-                    toast({ description: `Removed '${details.title}' in your watchlist.` })
-                }
-            } else {
-                const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/watchlist/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`, {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
-                if (request.status === 200) {
-                    if (watchlist !== undefined && watchlist !== null) {
-                        setWatchlist(addToList(watchlist, details))
-                        setInWatchlist(true)
-                    }
-                    // setInWatchlist(!inWatchlist)
-                    toast({ description: `Added '${details.title}' to your watchlist.` })
-                }
-            }
-            
-
-        } else {
-            toast({
-                title: "Log in Required",
-                variant: "destructive",
-                description: 'You must be logged in to add films to the your watchlist.'
-            })
-        }
-    }
-
-    const handleFavoriteIcon = async () => {
-        if (session.status === "authenticated") {
-            if (inFavorite) {
-                const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/favorites/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`, {
-                    method: 'DELETE',
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
-                if (request.status === 200) {
-                    
-                    if(favorites) {
-                        setFavorites(removeFromList(favorites, details.id))
-                        setInfavorite(false)
-
-                    }
-                    // mutate()
-                    toast({ description: `Removed '${details.title}' in your favorites.` })
-                }
-            } else {
-                const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/favorites/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`, {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
-                if (request.status === 200) {
-                    if (favorites !== undefined && favorites !== null) {
-                        setFavorites(addToList(favorites, details))
-                        setInfavorite(true)
-                    }
-                    
-                    toast({ description: `Added '${details.title}' to your favorites.` })
-                }
-            }
-        } else {
-            toast({
-                title: "Log in Required",
-                variant: "destructive",
-                description: 'You must be logged in to add films to the your favorite list.'
-            })
-        }
-    }
-
-
-    // useEffect(() => {
-    //     console.log(inWatchlist)
-    // })
 
     return (
         <DropdownMenu>
@@ -171,12 +78,15 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
                             sizes={sizes}
                             className=
                             {`
-                                w-full h-auto border-black border-4 transition-all rounded-md 
-                                shadow-2xl hover:border-slate-500 duration-300 cursor-pointer 
+                                w-full h-auto border-4 transition-all rounded-md 
+                                shadow-2xl  duration-300 cursor-pointer 
                                 ${className} 
                                 ${showHover ? 'opacity-50' : ''}
                                 ${isLoading ? " blur-lg " : " blur-0 "}
-                                ${inFavorite ? "hover:border-[#0B6E4F]" : ""}
+                                ${inWatchlist && "border-[#721817]"}
+                                ${inFavorite && "border-[#0B6E4F]"}
+                               
+                                
                             `}
                             onLoad={() => setIsLoading(false)}
                             priority
@@ -187,27 +97,25 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
                 {showHover && (
                     <>
                         <Card className='absolute bottom-3 inset-x-3 transition-opacity duration-700 z-10'>
-                        
+
                             <div className='flex justify-center gap-3'>
-                                {/* <form action={handleWatchlistIcon}> */}
-                                    {/* <Eyes onClick={handleWatchlistIcon}/> */}
-                                   <div onClick={handleWatchlistIcon} className='hover:cursor-pointer'>
-                                    {inWatchlist ? <Eye watched={true}/> : <Eye/> }
-                                    </div> 
-                                {/* </form> */}
-                                <div onClick={handleFavoriteIcon} className='hover:cursor-pointer'>
-                                    {inFavorite ? <Heart watched={true}/>: <Heart/>}
-                                </div>
-                                {/* <Heart onClick={handleLikeIcon} /> */}
-                                <DropdownMenuTrigger >
-                                    {inRated ? <Star watched={true}/> : <Star/>}
-                                </DropdownMenuTrigger>
+                                <WatchlistIcon inWatchlist={inWatchlist} setInWatchlist={setInWatchlist} details={details} />
+                                <FavoriteIcon inFavorite={inFavorite} setInfavorite={setInfavorite} details={details} />
+                                <RatedIcon 
+                                    inRated={inRated} setInRated={setInRated} 
+                                    details={details} ellipsisRef={ellipsisRef} 
+                                    inWatchlist={inWatchlist} setInWatchlist={setInWatchlist}
+                                />
+                            {/* //     <DropdownMenuTrigger >
+                            //         {inRated ? <Star watched={true} /> : <Star />}
+                            //     </DropdownMenuTrigger>
+                            // <DropdownMenuContent ref={ellipsisRef}>
+                            //     <DropdownMenuLabel>
+                            //         <StarRating movieDetails={details} inRated={inRated} setInRated={setInRated} />
+                            //     </DropdownMenuLabel>
+                            // </DropdownMenuContent> */}
+
                             </div>
-                            <DropdownMenuContent ref={ellipsisRef}>
-                                <DropdownMenuLabel>
-                                    <StarRating/>
-                                </DropdownMenuLabel>
-                            </DropdownMenuContent>
 
                         </Card>
 

@@ -1,23 +1,16 @@
 "use client"
 
 import React from 'react';
-import { MovieDetailsType, MoviePosterType } from '@/library/modals';
+import { MovieDetailsType } from '@/library/modals';
 import PosterCard from './PosterCard';
-import Link from 'next/link';
-import useSWR from 'swr'
-import { fetcher } from '@/library/fetcher';
-import { useSession } from 'next-auth/react';
-import { PosterCardType } from '@/library/modals';
-// fetchData(`/movie/${params.movieId}/recommendations?language=en-US&page=1`),
-import { KeyedMutator } from 'swr';
-import { useAccountInfoContext } from '@/provider/AccountInfoProvider';
+
 
 type MovieRecommendationsProps = {
     movieRecommendations: MovieDetailsType[]
 }
 
 const MovieRecommendations = ({movieRecommendations}: MovieRecommendationsProps) => {
-    const session = useSession()
+    
 
     
     // type swrType = {

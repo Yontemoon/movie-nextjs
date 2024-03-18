@@ -84,6 +84,32 @@ export const postFetchApi = async (url: string, data: {}) => {
     }
 }
 
+export const localFetch = async (url: string, method: string = 'GET', body?: {}) => {
+    try {
+        const options: RequestInit = {
+            method,
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+
+        if (body) {
+            options.body = JSON.stringify(body);
+        }
+
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}${url}`, options);
+        // console.log( response)
+        // if (!response.ok) {
+        //     throw new Error(`Failed to fetch data from ${url}. Status: ${response.status}`);
+        // }
+
+        return Response.json({message: "success"}, {status: 200});
+    } catch (error) {
+        console.error(`Error fetching data from ${url}:`, error);
+        throw error;
+    }
+};
+
 
 export const fetchResults = async (url: string) => {
     try {
