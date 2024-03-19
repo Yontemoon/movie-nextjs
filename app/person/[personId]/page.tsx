@@ -10,6 +10,8 @@ import { imageUrl } from '@/library/url';
 import { PersonDetailsType } from '@/library/modals';
 import PersonInfoSection from '@/components/PersonInfoSection';
 
+
+
 type PersonPageParams = {
     params: {
         personId: number
@@ -17,7 +19,7 @@ type PersonPageParams = {
 }
 
 const PersonPage = async ({ params }: PersonPageParams) => {
-
+    // const {Watchlist, rated, favorites} = useAccountInfoContext()
 
     const personDetails: PersonDetailsType = await fetchData(`/person/${params.personId}?language=en-US`)
     const externalIds = await fetchData(`/person/${params.personId}/external_ids`)

@@ -79,6 +79,7 @@ function CreditTable <TData, TValue> ({ data, columns }: DataTableProps<TData, T
                             <TableCell colSpan={columns.length} className="h-24 text-center">
                                 No Results.
                             </TableCell>
+                            
                         </TableRow>
                     
                 )}

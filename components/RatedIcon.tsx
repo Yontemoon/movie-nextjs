@@ -9,7 +9,7 @@ type PropTypes = {
     inRated: boolean;
     setInRated: React.Dispatch<React.SetStateAction<boolean>>
     details: MovieDetailsType
-    ellipsisRef: React.RefObject<HTMLDivElement>
+    ellipsisRef?: React.RefObject<HTMLDivElement>
     inWatchlist: boolean;
     setInWatchlist: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -18,7 +18,7 @@ type PropTypes = {
 const RatedIcon = ({inRated, details, setInRated, ellipsisRef, inWatchlist, setInWatchlist}: PropTypes) => {
 
     return (
-        <>
+        <DropdownMenu>
             <DropdownMenuTrigger >
                 {inRated ? <Star watched={true} /> : <Star />}
             </DropdownMenuTrigger>
@@ -31,7 +31,7 @@ const RatedIcon = ({inRated, details, setInRated, ellipsisRef, inWatchlist, setI
                     />
                 </DropdownMenuLabel>
             </DropdownMenuContent>
-        </>
+        </DropdownMenu>
     );
 };
 

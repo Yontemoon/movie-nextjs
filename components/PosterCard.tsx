@@ -20,6 +20,7 @@ import Star from './icons/Star';
 import FavoriteIcon from './FavoriteIcon';
 import WatchlistIcon from './WatchlistIcon';
 import RatedIcon from './RatedIcon';
+import EditAccountIcons from './EditAccountIcons';
 
 type PosterProps = {
     details: MovieDetailsType
@@ -99,24 +100,16 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
                         <Card className='absolute bottom-3 inset-x-3 transition-opacity duration-700 z-10 bg-opacity-60'>
 
                             <div className='flex justify-center gap-3'>
-                                <WatchlistIcon inWatchlist={inWatchlist} setInWatchlist={setInWatchlist} details={details} />
+                                <EditAccountIcons MovieDetails={details} ellipsisRef={ellipsisRef}/>
+
+                                {/* <WatchlistIcon inWatchlist={inWatchlist} setInWatchlist={setInWatchlist} details={details} />
                                 <FavoriteIcon inFavorite={inFavorite} setInfavorite={setInfavorite} details={details} />
                                 <RatedIcon 
                                     inRated={inRated} setInRated={setInRated} 
                                     details={details} ellipsisRef={ellipsisRef} 
                                     inWatchlist={inWatchlist} setInWatchlist={setInWatchlist}
-                                />
-                            {/* //     <DropdownMenuTrigger >
-                            //         {inRated ? <Star watched={true} /> : <Star />}
-                            //     </DropdownMenuTrigger>
-                            // <DropdownMenuContent ref={ellipsisRef}>
-                            //     <DropdownMenuLabel>
-                            //         <StarRating movieDetails={details} inRated={inRated} setInRated={setInRated} />
-                            //     </DropdownMenuLabel>
-                            // </DropdownMenuContent> */}
-
+                                /> */}
                             </div>
-
                         </Card>
 
                     </>
