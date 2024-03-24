@@ -32,9 +32,9 @@ export default async function RootLayout({
       <NextSessionProvider>
         <AccountInfoProvider>
           <body className={`${inter.className} bg-[#0D3B66]`}>
-            <div className="w-screen overflow-x-hidden flex flex-col ">
+            <div className="w-screen  flex flex-col ">
               <Navbar />
-              <div className="flex flex-col justify-center items-center content-center self-center text-white container">
+              <div className="flex flex-col justify-center items-center content-center self-center text-white container px-28">
                 {children}
                 <Toaster />
               </div>

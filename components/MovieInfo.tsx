@@ -2,14 +2,9 @@
 
 import React from 'react';
 import { MovieDetailsType, PersonCreditDetailsType } from '@/library/modals';
-import { imageUrl } from "@/library/url";
-import Image from 'next/image';
 import { getYear } from "date-fns"
 import Link from 'next/link';
-import AvatarCarousal from './AvatarCarousal';
-import MovieInfoPoster from './MovieInfoPoster';
-import MovieInfoBackdrop from './MovieInfoBackdrop';
-import StarRating from './StarRating';
+import { roundNumber } from '@/utils/format';
 
 type MovieInfoProps = {
     details: MovieDetailsType;
@@ -17,30 +12,37 @@ type MovieInfoProps = {
 }
 
 const MovieInfo = ({ details, movieCredits }: MovieInfoProps) => {
-
-    // const { data, mutate }: swrType = useSWR(`/api/recommendations/${session?.data?.user.id}/${session.data?.user.sessionId}/${movieId}`, fetcher)
+    
+    const directors = movieCredits.crew.filter((movie) =>  movie.job === "Director" )
+ 
     return (
         <>
-            <MovieInfoBackdrop details={details}/>
-            <div className='grid w-full gap-5 grid-cols-4 '>
-                <MovieInfoPoster details={details} className='row-span-1'/>
-                <div className='col-span-3'>
+            <div className='w-full'>
+                <div className=''>
                     <div className=''>
                         <h1 className=''>{details.title}</h1>
-                        <h2>{details.vote_average}</h2>
-                        <Link href={`/discover?year=${getYear(details.release_date)}&page=1`}>
-                            <h2>{getYear(details.release_date)}</h2>
-                        </Link>
-                        
+                        <div className='flex gap-4'>
+                            <h2>{roundNumber(details.vote_average)}</h2>
+                            <Link href={`/discover?year=${getYear(details.release_date)}&page=1`}>
+                                <h2>{getYear(details.release_date)}</h2>
+                            </Link>
+                            <>
+                            Directed by {directors.map((director) => (
+                                <Link href={`/person/${director.id}`}key={director.id}>
+                                    {director.name}
+                                </Link>
+                            ))}
+                            </>
+                        </div>
                     </div>
                     <div>
-                        <p>{details.tagline}</p>
+                        <p className='text-sm uppercase'>{details.tagline}</p>
                     </div>
-                    <div className=' overflow-hidden'>
+                    <div className='overflow-hidden'>
                         {details.overview}
                     </div>
 
-                    <AvatarCarousal credits={movieCredits.cast} />
+                    {/* <AvatarCarousal credits={movieCredits.cast} /> */}
 
                 </div>
 

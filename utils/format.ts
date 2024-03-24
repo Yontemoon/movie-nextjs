@@ -9,7 +9,10 @@ export const formatDate = (date: string) => {
 
 export const roundNumber = (number: number) => {
     return Math.round(number * 10) / 10;
+}
 
+export const numberWithCommas = (num: number) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
 
 export const initials = (name: string) => {

@@ -1,19 +1,50 @@
 export type MovieDetailsType = {
     adult: boolean
     backdrop_path: string;
-    genre_ids: number[]
+    genres: genre[]
     id: number;
     original_language: string;
     original_title: string;
     overview: string;
     popularity: number;
+    spoken_languages: {
+        english_name: string
+        iso_639_1: string
+        name: string
+    }[]
     poster_path: string,
     release_date: string,
     title: string,
     video: boolean,
     vote_average: number,
     vote_count: number
-    tagline: string
+    tagline: string;
+    production_companies: {
+        id: number;
+        logo_path: string;
+        name: string
+        origin_country: string
+    }[]
+    production_countries: {
+        iso_3166_1: string
+        name: string
+    }
+    budget: number
+    revenue: number
+}
+
+type genre = {
+    id: number
+    name: string    
+}
+
+export type AlternativeMovieTitlesType = {
+    id: number;
+    titles: {
+        iso_3166_1: string
+        title: string
+        type: string
+    }[]
 }
 
 export type RatedType = MovieDetailsType & {
@@ -89,6 +120,7 @@ export type PersonCrewDetails = {
     id: number;
     known_for_department: string;
     department: string;
-    job: string
+    job: string;
+    name: string
 }
 

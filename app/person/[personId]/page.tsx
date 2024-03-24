@@ -3,7 +3,7 @@
 import { fetchData } from '@/library/db';
 import React from 'react';
 import { MovieCreditDetailsType } from '@/library/modals';
-import sortCrewInfo from '@/library/sortCrewInfo';
+import sortPersonCrewInfo from '@/library/sortCrewInfo';
 import PersonAccordianTable from '@/components/PersonAccordianTable';
 import Image from 'next/image';
 import { imageUrl } from '@/library/url';
@@ -25,11 +25,11 @@ const PersonPage = async ({ params }: PersonPageParams) => {
     const externalIds = await fetchData(`/person/${params.personId}/external_ids`)
     const movieCredits: MovieCreditDetailsType = await fetchData(`/person/${params.personId}/movie_credits?language=en-US`)
     const ActingCredits = movieCredits.cast
-    const MiscCredits = sortCrewInfo(movieCredits.crew)
+    const MiscCredits = sortPersonCrewInfo(movieCredits.crew)
     // console.log(personDetails)
     return (
-        <div className='grid grid-cols-4 gap-10 my-5'>
-            <div className='sticky top-0 col-span-1'>
+        <div className='grid grid-cols-4 gap-10 my-5 '>
+            <div className='sticky top-10 col-span-1'>
                 <PersonInfoSection personDetails={personDetails} externalIds={externalIds}/>
             </div>
             <div className='col-span-3'>

@@ -1,4 +1,4 @@
-import { MovieCrewDetails } from "./modals"
+import { MovieCrewDetails, PersonCrewDetails } from "./modals"
 
 // const sortCrewInfo = (crewCredits: CrewDetails[]) => {
 //     return crewCredits.reduce((acc: {[key: string]: CrewDetails[]}, credit) => {
@@ -11,7 +11,7 @@ import { MovieCrewDetails } from "./modals"
 //     },{})
 // }
 
-const sortCrewInfo = (crewCredits: MovieCrewDetails[]) => {
+const sortPersonCrewInfo = (crewCredits: MovieCrewDetails[]) => {
     const result: { department: string, credits: MovieCrewDetails[] }[] = [];
     
     crewCredits.forEach((credit) => {
@@ -27,4 +27,22 @@ const sortCrewInfo = (crewCredits: MovieCrewDetails[]) => {
 
     return result;
 };
-export default sortCrewInfo
+
+export const sortMovieCrewInfo = (crewCredits: PersonCrewDetails[]) => {
+    const result: { job: string, credits: PersonCrewDetails[] }[] = [];
+    
+    crewCredits.forEach((credit) => {
+        const { job } = credit;
+        const existingDepartmentIndex = result.findIndex(item => item.job === job);
+
+        if (existingDepartmentIndex === -1) {
+            result.push({ job, credits: [credit] });
+        } else {
+            result[existingDepartmentIndex].credits.push(credit);
+        }
+    });
+
+    return result;
+}
+
+export default sortPersonCrewInfo

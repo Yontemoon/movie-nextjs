@@ -34,7 +34,7 @@ const Navbar = () => {
     }
 
     return (
-        <header className="sticky top-0 z-10 w-full border-b border-border/40">
+        <header className="top-0 z-10 w-full border-b border-border/40">
             <DropdownMenu>
             <div className="container h-14 flex max-w-screen-2xl items-center">
                 <div className="mr-4 hidden md:flex">
