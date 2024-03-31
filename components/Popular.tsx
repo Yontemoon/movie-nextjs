@@ -51,7 +51,7 @@ const Popular = ({ popular }: PopularPropTypes) => {
                                         src={`${imageUrl}${movie.backdrop_path}`}
                                         
                                         className="flex opacity-85 rounded-lg z-0 shadow-xl object-cover"
-                                        sizes="(min-width: 1480px) 1336px, (min-width: 400px) calc(94.34vw - 41px), calc(15vw + 259px)"
+                                        sizes="(min-width: 1480px) 1176px, (min-width: 720px) calc(91.89vw - 166px), 455px" 
                                     />
                                 </Link>
 

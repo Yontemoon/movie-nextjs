@@ -31,6 +31,7 @@ export type MovieDetailsType = {
     }
     budget: number
     revenue: number
+    genre_ids: number[]
 }
 
 type genre = {
