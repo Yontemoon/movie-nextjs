@@ -1,12 +1,12 @@
 "use client"
 
 import { useForm } from "react-hook-form"
-import Input from "postcss/lib/input";
 import { Button } from "./ui/button";
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation";
-import { fetchData } from "@/library/db";
-import { redirect } from "next/navigation";
+import SignUpDialog from "./SignUpDialog";
+import { Input } from "./ui/input";
+
 
 const CredentialsForm = () => {
     const router = useRouter()
@@ -19,24 +19,20 @@ const CredentialsForm = () => {
             password: data.password,
             redirect: false
         })
-        // console.log("signinResponse", signinResponse)
-        // // if (signinResponse.ok) {
         router.push("/")
-        // }
-
     }
 
     return (
-        <>
-
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <label>Username: </label>
-                    <input type="text" {...register("username", { required: true })} />
+        <div className="">
+            <h1 className="flex justify-center">Sign In</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="gap-4 w-96">
+                <div className="pb-4">
+                    <label className="text-sm uppercase ">Username</label>
+                    <Input type="text" {...register("username", { required: true })} />
                 </div>
-                <div>
-                    <label>Password: </label>
-                    <input type="password"{...register("password", { required: true })} />
+                <div className="pb-4">
+                    <label className="text-sm uppercase ">Password</label>
+                    <Input type="password"{...register("password", { required: true })} />
                 </div>
                 <Button
                     variant={"default"}
@@ -45,8 +41,13 @@ const CredentialsForm = () => {
                 >
                     Login
                 </Button>
+                <div className="flex justify-center my-3">
+                    <SignUpDialog/>
+
+                </div>
+                
             </form>
-        </>
+        </div>
 
     );
 };

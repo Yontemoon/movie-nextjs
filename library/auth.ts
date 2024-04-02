@@ -39,7 +39,7 @@ export const authConfig: NextAuthOptions = {
               
             },
             async authorize(credentials) {
-                console.log("passing here")
+            
                 if (!credentials || !credentials?.username || !credentials?.password) {
                     return null
                 }
@@ -80,13 +80,14 @@ export const authConfig: NextAuthOptions = {
                 return null
             }
         }),
-        GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID as string,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
-        }),
-        GithubProvider({
-            clientId: process.env.GITHUB_CLIENT_ID as string,
-            clientSecret: process.env.GITHUB_CLIENT_SECRET as string
-        })
+        
+        // GoogleProvider({
+        //     clientId: process.env.GOOGLE_CLIENT_ID as string,
+        //     clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
+        // }),
+        // GithubProvider({
+        //     clientId: process.env.GITHUB_CLIENT_ID as string,
+        //     clientSecret: process.env.GITHUB_CLIENT_SECRET as string
+        // })
     ]
 }

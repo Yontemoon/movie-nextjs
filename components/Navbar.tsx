@@ -25,13 +25,10 @@ import {
 } from "@/components/ui/dialog"
 import Heart from "./icons/Heart";
 import Star from "./icons/Star";
+import { useSearchParams } from "next/navigation";
 
 const Navbar = () => {
     const session = useSession()
-    console.log(session)
-    const handleLogout = () => {
-        signOut()
-    }
 
     return (
         <header className="top-0 z-10 w-full border-b border-border/40">
@@ -42,7 +39,7 @@ const Navbar = () => {
 
                 </div>
                 <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-                    {session.status === "authenticated" && 
+                    {session.status === "authenticated" ? 
                     <>
                         <DropdownMenuTrigger>{session.data.user?.name}</DropdownMenuTrigger>
                         <DropdownMenuContent>
@@ -55,9 +52,11 @@ const Navbar = () => {
                             <DropdownMenuSeparator/>
                             <DropdownMenuItem onClick={() => signOut()}>Sign Out</DropdownMenuItem>
                         </DropdownMenuContent>
-                    </>
+                    </> :
+                    <Link href="/login">Sign In</Link>
                     }
-                    <div className="w-full flex-1 md:w-auto md:flex-none">
+                    <div className="w-full flex-1 md:w-auto md:flex-none gap-5">
+                        
                         <Dialog>
                             <DialogTrigger>
                                 Searching for...

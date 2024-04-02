@@ -30,9 +30,12 @@ const DiscoverResults = async ({
 
     return (
         <div>
-            <div className='flex-wrap flex gap-3 my-5'>
+            <div className='flex-wrap flex gap-3 my-5 justify-center'>
                 {results.map((result: MovieDetailsType) => (
-                    <PosterCard key={result.id} details={result} width={256} height={384} sizes="(min-width: 560px) 256px, (min-width: 520px) calc(415vw - 1985px), calc(54.5vw - 24px)"/>
+                    <div key={result.id} className='w-[256px] h-[384px]'>
+                        <PosterCard  details={result} width={256} height={384} sizes="(min-width: 560px) 256px, (min-width: 520px) calc(415vw - 1985px), calc(54.5vw - 24px)"/>
+                        
+                    </div>
                 ))}
             </div>
            

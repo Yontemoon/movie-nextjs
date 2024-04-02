@@ -1,11 +1,11 @@
 import React from 'react';
 
-const page = () => {
+const loading = () => {
     return (
         <div>
-            details page
+            LOADING
         </div>
     );
 };
 
-export default page;
+export default loading;

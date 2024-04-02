@@ -1,17 +1,9 @@
 import React from 'react';
 import CredentialsForm from '@/components/CredentialsForm';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { fetchData } from '@/library/db';
-import { redirect } from 'next/navigation';
 
-const LoginPage = async () => {
-
-    
+const LoginPage = () => {
     return (
-        <div>
-
-            {/* TRY ONLCIK INSTEAD */}
+        <div className='w-full flex justify-center h-screen mt-10 content-center'>
             <CredentialsForm/>
         </div>
     );

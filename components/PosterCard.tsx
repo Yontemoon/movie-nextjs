@@ -3,7 +3,7 @@
 import { MoviePosterType, MovieDetailsType, PosterCardType } from '@/library/modals';
 import Image from 'next/image';
 import { imageUrl } from '@/library/url';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, Suspense } from 'react';
 import { Card } from "@/components/ui/card"
 import Link from 'next/link';
 import Eye from './icons/Eye';
@@ -21,6 +21,7 @@ import FavoriteIcon from './FavoriteIcon';
 import WatchlistIcon from './WatchlistIcon';
 import RatedIcon from './RatedIcon';
 import EditAccountIcons from './EditAccountIcons';
+import PosterFallback from './PosterFallback';
 
 type PosterProps = {
     details: MovieDetailsType
@@ -40,6 +41,7 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
     const [inFavorite, setInfavorite] = useState(false)
     const [inRated, setInRated] = useState(false)
     const ellipsisRef = useRef<HTMLDivElement>(null)
+    
 
     useEffect(() => {
         // console.log("its passing here");
@@ -64,6 +66,7 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
     }
 
     return (
+        
         <DropdownMenu>
             <div className='relative'
                 onMouseEnter={handleMouseEnter}
@@ -77,6 +80,7 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
                             width={width}
                             height={height}
                             sizes={sizes}
+                            
                             className=
                             {`
                                 w-full h-auto border-4 transition-all rounded-md 
@@ -90,8 +94,10 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
                                 
                             `}
                             onLoad={() => setIsLoading(false)}
+                            
                             priority
                             quality={50}
+                            
                         />
                     }
                 </Link>
@@ -117,6 +123,7 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
 
             </div>
         </DropdownMenu>
+        
     );
 };
 

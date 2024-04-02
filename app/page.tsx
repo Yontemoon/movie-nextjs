@@ -1,10 +1,13 @@
-import Popular from "@/components/Popular";
-import { fetchData } from "@/library/db";
-import CarousalDefault from "@/components/CarousalDefault";
+"use server"
 
-export default async function Home() {
-  const data = await fetchData("/api/watchlist")
-  console.log(data)
+import Popular from "@/components/Popular";
+import { fetchData, postFetchApi } from "@/library/db";
+import CarousalDefault from "@/components/CarousalDefault";
+import { getServerSession } from "next-auth"
+
+
+export default async function Home () {
+  
   const popular = await fetchData("/movie/popular?language=en-US&page=1&region=US").then((response)=> {
     return response.results
   })
