@@ -25,11 +25,13 @@ const FavoriteIcon = ({inFavorite, setInfavorite, details}: PropTypes) => {
             if (inFavorite) {
 
                 const request = await localFetch(`/api/favorites/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`, "DELETE")
+                console.log(request)
                 if (request.status === 200) {
 
                     if (favorites) {
-                        setFavorites(removeFromList(favorites, details.id))
+                        console.log("its pasing here")
                         setInfavorite(false)
+                        setFavorites(removeFromList(favorites, details.id))
 
                     }
                     // mutate()

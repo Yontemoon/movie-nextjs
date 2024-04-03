@@ -6,6 +6,8 @@ import SearchDialog from "./SearchDialog";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import Eye from "./icons/Eye";
+import Discover from "./icons/Discover";
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -13,7 +15,8 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-  } from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
+import SmallDownArrow from "./icons/SmallDownArrow";
 
 import {
     Dialog,
@@ -26,6 +29,7 @@ import {
 import Heart from "./icons/Heart";
 import Star from "./icons/Star";
 import { useSearchParams } from "next/navigation";
+import Search from "./icons/Search";
 
 const Navbar = () => {
     const session = useSession()
@@ -33,42 +37,75 @@ const Navbar = () => {
     return (
         <header className="top-0 z-10 w-full border-b border-border/40">
             <DropdownMenu>
-            <div className="container h-14 flex max-w-screen-2xl items-center">
-                <div className="mr-4 hidden md:flex">
-                    <Link href="/">Icon</Link>
+                <div className="container h-14 flex max-w-screen-2xl items-center px-44">
+                    <div className="mr-4 hidden md:flex">
+                        <Link href="/">Icon</Link>
 
-                </div>
-                <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-                    {session.status === "authenticated" ? 
-                    <>
-                        <DropdownMenuTrigger>{session.data.user?.name}</DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                            
-                            <DropdownMenuLabel>Your Profile</DropdownMenuLabel> 
-                            <DropdownMenuSeparator/>
-                            <DropdownMenuItem><Link href={`/${session.data.user.name}/watchlist`}>Your Watchlist <Eye watched={true}/></Link></DropdownMenuItem>
-                            <DropdownMenuItem><Link href={`/${session.data.user.name}/favorites`}>Your Favorites <Heart watched={true}/></Link></DropdownMenuItem>
-                            <DropdownMenuItem><Link href={`/${session.data.user.name}/ratings`}>Your Ratings <Star watched={true}/></Link></DropdownMenuItem>
-                            <DropdownMenuSeparator/>
-                            <DropdownMenuItem onClick={() => signOut()}>Sign Out</DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </> :
-                    <Link href="/login">Sign In</Link>
-                    }
-                    <div className="w-full flex-1 md:w-auto md:flex-none gap-5">
-                        
+                    </div>
+                    <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+                        {session.status === "authenticated" ?
+                            <>
+                                <DropdownMenuTrigger className=" flex font-semibold text-center items-center uppercase text-sm  px-2 rounded-sm bg-[#14c78f] hover:bg-[#17ad7e] transition-all duration-75">
+                                    {session.data.user?.name} <SmallDownArrow />
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent>
+
+                                    <DropdownMenuLabel>Your Profile</DropdownMenuLabel>
+                                    <DropdownMenuSeparator />
+                                    <div>
+                                        <Link href={`/${session.data.user.name}/watchlist`} >
+                                            <DropdownMenuItem className="justify-between">
+
+                                                <span className="mr-3">
+                                                    Your Watchlist
+                                                </span>
+                                                <Eye watched={true} />
+
+                                            </DropdownMenuItem>
+                                        </Link>
+                                        <Link href={`/${session.data.user.name}/favorites`} >
+                                            <DropdownMenuItem className="justify-between">
+
+                                                <span className="">
+                                                    Your Favorites
+                                                </span>
+                                                <Heart watched={true} />
+
+
+                                            </DropdownMenuItem>
+                                        </Link>
+                                        <Link href={`/${session.data.user.name}/ratings`} >
+                                            <DropdownMenuItem className="justify-between">
+
+                                                <span className="">
+                                                    Your Ratings
+                                                </span>
+                                                <Star watched={true} />
+
+
+                                            </DropdownMenuItem>
+                                        </Link>
+                                    </div>
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem onClick={() => signOut()}>Sign Out</DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </> :
+                            <Link href="/login">Sign In</Link>
+                        }
                         <Dialog>
                             <DialogTrigger>
-                                Searching for...
+                                <Search />
                             </DialogTrigger>
                             <DialogContent className="">
                                 <SearchDialog />
                             </DialogContent>
                         </Dialog>
+
+                        <Link href="/discover">
+                            <Discover />
+                        </Link>
                     </div>
-                    {/* {session.status !== "authenticated" ? <Link href={"/login"}>Login</Link> :<Button variant={"destructive"} onClick={handleLogout}>Logout</Button>} */}
                 </div>
-            </div>
             </DropdownMenu>
         </header>
 

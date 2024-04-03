@@ -5,7 +5,7 @@ const Heart = ({watched = false}, props: SVGProps<SVGSVGElement>) => (
     className="hover:cursor-pointer"
     xmlns="http://www.w3.org/2000/svg"
     width={28}
-    fill={watched ? "#0B6E4F" : "currentColor"}
+    fill={watched ? "#14c78f" : "currentColor"}
     viewBox="-2 -4 24 24"
     {...props}
   >

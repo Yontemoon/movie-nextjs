@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.root,
+#root,
+#docs-root{
+  --primary-red: #b22524;
+  --yellow: #faa349;
+  --green: #14c78f;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

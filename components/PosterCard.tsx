@@ -85,12 +85,13 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
                             {`
                                 w-full h-auto border-4 transition-all rounded-md 
                                 shadow-2xl  duration-300 cursor-pointer 
+                            
                                 ${className} 
                                 ${showHover ? 'opacity-50' : ''}
                                 ${isLoading ? " blur-lg " : " blur-0 "}
-                                ${inWatchlist && "border-[#721817]"}
-                                ${inFavorite && "border-[#0B6E4F]"}
-                               
+                                ${inFavorite && "border-[#14c78f]" }
+                                ${inWatchlist && "border-[#b22524]"}
+                                
                                 
                             `}
                             onLoad={() => setIsLoading(false)}
@@ -106,7 +107,16 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
                         <Card className='absolute bottom-3 inset-x-3 transition-opacity duration-700 z-10 bg-opacity-60'>
 
                             <div className='flex justify-center gap-3'>
-                                <EditAccountIcons MovieDetails={details} ellipsisRef={ellipsisRef}/>
+                                <EditAccountIcons 
+                                    MovieDetails={details} 
+                                    ellipsisRef={ellipsisRef}
+                                    inWatchlist={inWatchlist}
+                                    setInWatchlist={setInWatchlist}           
+                                    inFavorite={inFavorite}
+                                    setInfavorite={setInfavorite}
+                                    setInRated={setInRated}
+                                    inRated={inRated}
+                                />
 
                                 {/* <WatchlistIcon inWatchlist={inWatchlist} setInWatchlist={setInWatchlist} details={details} />
                                 <FavoriteIcon inFavorite={inFavorite} setInfavorite={setInfavorite} details={details} />

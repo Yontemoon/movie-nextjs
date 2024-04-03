@@ -1,35 +1,39 @@
+"use client"
+
 import { MovieCastDetails, MovieCrewDetails, MovieDetailsType } from "@/library/modals";
-import { useState, useEffect } from "react";
-import { useAccountInfoContext } from "@/provider/AccountInfoProvider";
-import { useSession } from "next-auth/react";
 import WatchlistIcon from "./WatchlistIcon";
 import RatedIcon from "./RatedIcon";
 import FavoriteIcon from "./FavoriteIcon";
 
 type PropTypes = {
-    MovieDetails: MovieCastDetails | MovieCrewDetails | MovieDetailsType
-    ellipsisRef?: React.RefObject<HTMLDivElement>
-
+    MovieDetails: MovieCastDetails | MovieCrewDetails | MovieDetailsType;
+    ellipsisRef?: React.RefObject<HTMLDivElement>;
+    inWatchlist: boolean;
+    setInWatchlist: React.Dispatch<React.SetStateAction<boolean>>;
+    inFavorite: boolean;
+    setInfavorite: React.Dispatch<React.SetStateAction<boolean>>;
+    inRated: boolean;
+    setInRated: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const EditAccountIcons = ({MovieDetails, ellipsisRef}: PropTypes) => {
+const EditAccountIcons = ({MovieDetails, ellipsisRef, inWatchlist, setInWatchlist, inFavorite, setInfavorite, inRated, setInRated}: PropTypes) => {
 
-    const [inWatchlist, setInWatchlist] = useState(false)
-    const [inFavorite, setInfavorite] = useState(false)
-    const [inRated, setInRated] = useState(false)
+    // const [inWatchlist, setInWatchlist] = useState(false)
+    // const [inFavorite, setInfavorite] = useState(false)
+    // const [inRated, setInRated] = useState(false)
 
-    const { watchlist, favorites, rated } = useAccountInfoContext()
+    // const { watchlist, favorites, rated } = useAccountInfoContext()
 
-    const session = useSession()
+    // const session = useSession()
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        if (session.status === 'authenticated' && watchlist && favorites && rated) {
-            setInWatchlist(watchlist?.some((movie) => movie.id === MovieDetails.id));
-            setInfavorite(favorites?.some((movie) => movie.id === MovieDetails.id))
-            setInRated(rated?.some((movie) => movie.id === MovieDetails.id))
-        }
-    }, [session.status, watchlist, MovieDetails.id, favorites, rated])
+    //     if (session.status === 'authenticated' && watchlist && favorites && rated) {
+    //         setInWatchlist(watchlist?.some((movie) => movie.id === MovieDetails.id));
+    //         setInfavorite(favorites?.some((movie) => movie.id === MovieDetails.id))
+    //         setInRated(rated?.some((movie) => movie.id === MovieDetails.id))
+    //     }
+    // }, [])
     
 
     return (

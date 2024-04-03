@@ -14,6 +14,7 @@ import {
 import { imageUrl } from "./url"
 import Image from "next/image"
 import EditAccountIcons from "@/components/EditAccountIcons"
+import EditAccountIconsPerson from "@/components/EditAccountIconsPerson"
 
 
 export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
@@ -118,7 +119,7 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
                 <p>Your Lists</p>
             )
         },
-        cell: ({row}) => <EditAccountIcons MovieDetails={row.original}/>
+        cell: ({row}) => <EditAccountIconsPerson MovieDetails={row.original}/>
     },
 ]
 
@@ -225,7 +226,7 @@ export const CrewColumns: ColumnDef<MovieCrewDetails, any>[] = [
                 <p>Your Lists</p>
             )
         },
-        cell: ({row}) => <EditAccountIcons MovieDetails={row.original}/>
+        cell: ({row}) => <EditAccountIconsPerson MovieDetails={row.original}/>
     },
 ]
 

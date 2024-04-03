@@ -25,13 +25,7 @@ const WatchlistIcon = ({ inWatchlist, setInWatchlist, details }: TypeProps) => {
 
         if (session.status === "authenticated") {
             if (inWatchlist) {
-                // const request = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/watchlist/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`, {
-                //     method: 'DELETE',
-                //     headers: {
-                //         "Content-Type": "application/json",
-                //     },
-                // })
-
+                
                 const request = await localFetch(`/api/watchlist/${session.data.user.id}/${session.data.user.sessionId}/${details.id}`, 'DELETE')
                 
                 if (request.status === 200) {
