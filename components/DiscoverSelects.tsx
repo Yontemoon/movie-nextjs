@@ -13,6 +13,7 @@ import { genres } from "@/library/genres";
 import countries from "@/library/countries";
 import { years } from "@/library/years";
 import sortBy from "@/library/sortBy";
+import { useState } from "react";
 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
@@ -24,7 +25,11 @@ const DiscoverSelects = () => {
     const { replace } = useRouter()
     const pathname = usePathname()
     const searchParams = useSearchParams()
-    
+
+    const [genreValue, setGenreValue] = useState(searchParams.get("genre")?.toString() || '');
+    const [yearValue, setYearValue] = useState(searchParams.get("year")?.toString() || '');
+    const [countryValue, setCountryValue] = useState(searchParams.get("country")?.toString() || '');
+    const [sortByValue, setSortByValue] = useState(searchParams.get("sortBy")?.toString() || "popularity.desc");    
 
     const handleSearchParams = (key: string, value: string) => {
 
@@ -38,11 +43,27 @@ const DiscoverSelects = () => {
         }
         const page = params.get("page")
         replace(`${pathname}?${params.toString()}`)
+
     }
+
+    const handleReset = () => {
+        // Reset all select options
+        setGenreValue('');
+        setYearValue('');
+        setCountryValue('');
+        setSortByValue('popularity.desc');
+
+        // Reset searchParams
+        const params = new URLSearchParams(searchParams);
+        params.forEach((value, key) => {
+            params.delete(key);
+        });
+        replace(`${pathname}?`);
+    };
 
     return (
         <span className="flex">
-            <Select onValueChange={(value) => handleSearchParams("genre", value)} defaultValue={searchParams.get("genre")?.toString()} >
+            <Select onValueChange={(value) => {setGenreValue(value); handleSearchParams("genre", value)}} defaultValue={searchParams.get("genre")?.toString()} value={genreValue}>
                 <SelectTrigger className="w-[180px] bg-[#181a1b] border-[#363b3d]">
                     <SelectValue placeholder="All Genres" />
                 </SelectTrigger>
@@ -55,7 +76,7 @@ const DiscoverSelects = () => {
                 </SelectContent>
             </Select>
 
-            <Select onValueChange={(value) => handleSearchParams("year", value)} defaultValue={searchParams.get("year")?.toString()}>
+            <Select onValueChange={(value) => {setYearValue(value); handleSearchParams("year", value)}} defaultValue={searchParams.get("year")?.toString()} value={yearValue}>
                 <SelectTrigger className="w-[180px] bg-[#181a1b] border-[#363b3d]">
                     <SelectValue placeholder="Release Year" />
                 </SelectTrigger>
@@ -67,7 +88,7 @@ const DiscoverSelects = () => {
                     ))}
                 </SelectContent>
             </Select>
-            <Select onValueChange={(value) => handleSearchParams("country", value)} defaultValue={searchParams.get("country")?.toString()}>
+            <Select onValueChange={(value) => {setCountryValue(value); handleSearchParams("country", value)}} defaultValue={searchParams.get("country")?.toString()} value={countryValue}>
                 <SelectTrigger className="w-[180px] bg-[#181a1b] border-[#363b3d]">
                     <SelectValue placeholder="Country" />
                 </SelectTrigger>
@@ -80,7 +101,7 @@ const DiscoverSelects = () => {
                 </SelectContent>
             </Select>
 
-            <Select onValueChange={(value) => handleSearchParams("sortBy", value)} defaultValue={searchParams.get("sortBy")?.toString() || "popularity.desc"}>
+            <Select onValueChange={(value) => {setSortByValue(value); handleSearchParams("sortBy", value)}} defaultValue={searchParams.get("sortBy")?.toString() || "popularity.desc"} value={sortByValue}>
                 <SelectTrigger className="w-[180px] bg-[#181a1b] border-[#363b3d]">
                     <SelectValue />
                 </SelectTrigger>
@@ -94,9 +115,11 @@ const DiscoverSelects = () => {
             </Select>
             
             {/* ADD A FILTER SECTION */}
-            <Button >
-                Reset
-            </Button>
+            
+                <Button onClick={handleReset}>
+                    Reset
+                </Button>
+            
         </span>
     );
 };
