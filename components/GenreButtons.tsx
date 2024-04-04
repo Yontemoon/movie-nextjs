@@ -14,7 +14,7 @@ const GenreButtons = ({movie}: {movie: MovieDetailsType}) => {
         <div className="gap-2 flex z-20">
             {movie.genre_ids.slice(0, 3).map((genreId, index) => (
                 <Link key={index} href={`/discover?genre=${genreId}&page=1`}>
-                    <Button variant="outline" size="sm"  className="z-40">{getGenreName(genreId)}</Button>
+                    <Button size="sm" className="z-40 bg-transparent border-white border">{getGenreName(genreId)}</Button>
                 </Link>
             ))}
         </div>

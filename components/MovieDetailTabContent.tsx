@@ -19,7 +19,7 @@ const MovieDetailsTabContent = ({ movieId, details, movieCredits, movieAltTitles
     
     const pathname = usePathname()
     const crew = sortMovieCrewInfo(movieCredits.crew)
-    console.log(details)
+    // console.log(details)
 
     const [current, setCurrent] = useState("")
 

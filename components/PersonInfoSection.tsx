@@ -22,7 +22,7 @@ const PersonInfoSection = ({ personDetails, externalIds }: PropTypes) => {
                 <h2 className="text-lg">{personDetails.name}</h2>
             </div>
             <Image
-                className=" sticky rounded-lg top-0 left-0 border hover:border-blue-300 cursor-pointer"
+                className="  rounded-lg top-0 left-0 border hover:border-blue-300 cursor-pointer"
                 style={{ alignSelf: "start" }}
                 src={`${imageUrl}${personDetails.profile_path}`}
                 alt={personDetails.name}

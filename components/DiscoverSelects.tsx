@@ -42,13 +42,13 @@ const DiscoverSelects = () => {
 
     return (
         <span className="flex">
-            <Select onValueChange={(value) => handleSearchParams("genre", value)} defaultValue={searchParams.get("genre")?.toString()}>
-                <SelectTrigger className="w-[180px]">
+            <Select onValueChange={(value) => handleSearchParams("genre", value)} defaultValue={searchParams.get("genre")?.toString()} >
+                <SelectTrigger className="w-[180px] bg-[#181a1b] border-[#363b3d]">
                     <SelectValue placeholder="All Genres" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-[#181a1b] border-[#363b3d]">
                     {genres.map((genre) => (
-                        <SelectItem key={genre.id} value={genre.id.toString()}>
+                        <SelectItem key={genre.id} value={genre.id.toString()} className="text-white">
                             {genre.name}
                         </SelectItem>
                     ))}
@@ -56,24 +56,24 @@ const DiscoverSelects = () => {
             </Select>
 
             <Select onValueChange={(value) => handleSearchParams("year", value)} defaultValue={searchParams.get("year")?.toString()}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] bg-[#181a1b] border-[#363b3d]">
                     <SelectValue placeholder="Release Year" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-[#181a1b] border-[#363b3d]">
                     {years.map((year, index) => (
-                        <SelectItem key={index} value={year.toString()}>
+                        <SelectItem key={index} value={year.toString()} className="text-white">
                             {year}
                         </SelectItem>
                     ))}
                 </SelectContent>
             </Select>
             <Select onValueChange={(value) => handleSearchParams("country", value)} defaultValue={searchParams.get("country")?.toString()}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] bg-[#181a1b] border-[#363b3d]">
                     <SelectValue placeholder="Country" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-[#181a1b] border-[#363b3d]">
                     {countries.map((country, index) => (
-                        <SelectItem key={index} value={country.iso_3166_1}>
+                        <SelectItem key={index} value={country.iso_3166_1} className="text-white">
                             {country.english_name}
                         </SelectItem>
                     ))}
@@ -81,12 +81,12 @@ const DiscoverSelects = () => {
             </Select>
 
             <Select onValueChange={(value) => handleSearchParams("sortBy", value)} defaultValue={searchParams.get("sortBy")?.toString() || "popularity.desc"}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] bg-[#181a1b] border-[#363b3d]">
                     <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-[#181a1b] border-[#363b3d]">
                     {sortBy.map((sort, index) => (
-                        <SelectItem key={index} value={sort.key}>
+                        <SelectItem key={index} value={sort.key} className="text-white">
                             {sort.label}
                         </SelectItem>
                     ))}

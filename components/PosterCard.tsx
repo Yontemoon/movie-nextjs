@@ -1,27 +1,20 @@
 "use client"
 
-import { MoviePosterType, MovieDetailsType, PosterCardType } from '@/library/modals';
+import { MovieDetailsType } from '@/library/modals';
 import Image from 'next/image';
 import { imageUrl } from '@/library/url';
-import { useState, useRef, useEffect, Suspense } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Card } from "@/components/ui/card"
 import Link from 'next/link';
-import Eye from './icons/Eye';
-import Heart from './icons/Heart';
-import { useToast } from './ui/use-toast';
-import Ellipsis from './icons/Ellipsis';
+
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuLabel } from './ui/dropdown-menu';
 import DefaultPoster from './DefaultPoster';
 import { useSession } from 'next-auth/react';
 import { useAccountInfoContext } from '@/provider/AccountInfoProvider';
-import { removeFromList, addToList } from '@/library/crud';
-import StarRating from './StarRating';
-import Star from './icons/Star';
-import FavoriteIcon from './FavoriteIcon';
-import WatchlistIcon from './WatchlistIcon';
-import RatedIcon from './RatedIcon';
+
+
 import EditAccountIcons from './EditAccountIcons';
-import PosterFallback from './PosterFallback';
+
 
 type PosterProps = {
     details: MovieDetailsType
@@ -68,12 +61,15 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
     return (
         
         <DropdownMenu>
-            <div className='relative'
+            <div className='relative h-full'
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             >
-                <Link href={`/movie/details/${details.id}`} className={pointerEvent ? `` : `pointer-events-none`}>
-                    {details.poster_path === null ? <DefaultPoster movieTitle={`${details.title}`} /> :
+                <Link href={`/movie/details/${details.id}`} className={`${pointerEvent ? `` : `pointer-events-none`}`}>
+                    {details.poster_path === null ? 
+                    <div className='h-full'>
+                        <DefaultPoster movieTitle={`${details.title}`} /> 
+                    </div> :
                         <Image
                             src={`${imageUrl}${details.poster_path}`}
                             alt={`${details.id}`}

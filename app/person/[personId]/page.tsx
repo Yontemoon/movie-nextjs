@@ -29,7 +29,7 @@ const PersonPage = async ({ params }: PersonPageParams) => {
     // console.log(personDetails)
     return (
         <div className='grid grid-cols-4 gap-10 my-5 '>
-            <div className='sticky top-10 col-span-1'>
+            <div className=' top-10 col-span-1'>
                 <PersonInfoSection personDetails={personDetails} externalIds={externalIds}/>
             </div>
             <div className='col-span-3'>
