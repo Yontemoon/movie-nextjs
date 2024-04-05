@@ -34,7 +34,7 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
     const [inFavorite, setInfavorite] = useState(false)
     const [inRated, setInRated] = useState(false)
     const ellipsisRef = useRef<HTMLDivElement>(null)
-    
+
 
     useEffect(() => {
         // console.log("its passing here");
@@ -59,55 +59,65 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
     }
 
     return (
-        
+
         <DropdownMenu>
-            <div className='relative h-full'
+            <div
+                className={`
+                    relative h-full border-2 rounded-sm shadow-2xl w-full z-10
+                    ${inFavorite && "border-[#14c78f]"}
+                    ${inWatchlist && "border-[#b22524]"}
+                    
+                `}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             >
-                <Link href={`/movie/details/${details.id}`} className={`${pointerEvent ? `` : `pointer-events-none`}`}>
-                    {details.poster_path === null ? 
-                    <div className='h-full'>
-                        <DefaultPoster movieTitle={`${details.title}`} /> 
-                    </div> :
+                <Link href={`/movie/details/${details.id}`} className={`${pointerEvent ? `` : `pointer-events-none`} w-full h-full`}>
+
+                    {details.poster_path === null ?
+                        <DefaultPoster movieTitle={`${details.title}`} />
+                        :
                         <Image
                             src={`${imageUrl}${details.poster_path}`}
                             alt={`${details.id}`}
+                            // fill
+                            // objectFit='true'
                             width={width}
                             height={height}
                             sizes={sizes}
-                            
+
                             className=
                             {`
-                                w-full h-auto border-4 transition-all rounded-md 
-                                shadow-2xl  duration-300 cursor-pointer 
-                            
+                                w-full h-full  transition-all  
+                                  duration-300 cursor-pointer 
+                                  ${inRated && "brightness-50"}
                                 ${className} 
                                 ${showHover ? 'opacity-50' : ''}
                                 ${isLoading ? " blur-lg " : " blur-0 "}
-                                ${inFavorite && "border-[#14c78f]" }
-                                ${inWatchlist && "border-[#b22524]"}
+                                z-0
+                                
                                 
                                 
                             `}
                             onLoad={() => setIsLoading(false)}
-                            
+
                             priority
                             quality={50}
-                            
+
                         />
+
                     }
                 </Link>
+
                 {showHover && (
                     <>
                         <Card className='absolute bottom-3 inset-x-3 transition-opacity duration-700 z-10 bg-opacity-60'>
 
                             <div className='flex justify-center gap-3'>
-                                <EditAccountIcons 
-                                    MovieDetails={details} 
+                                <EditAccountIcons
+                                    MovieDetails={details}
                                     ellipsisRef={ellipsisRef}
                                     inWatchlist={inWatchlist}
-                                    setInWatchlist={setInWatchlist}           
+                                    setInWatchlist={setInWatchlist}
                                     inFavorite={inFavorite}
                                     setInfavorite={setInfavorite}
                                     setInRated={setInRated}
@@ -129,7 +139,7 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
 
             </div>
         </DropdownMenu>
-        
+
     );
 };
 

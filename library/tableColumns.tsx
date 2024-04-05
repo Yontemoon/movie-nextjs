@@ -15,6 +15,7 @@ import { imageUrl } from "./url"
 import Image from "next/image"
 import EditAccountIcons from "@/components/EditAccountIcons"
 import EditAccountIconsPerson from "@/components/EditAccountIconsPerson"
+import DefaultPoster from "@/components/DefaultPoster"
 
 
 export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
@@ -55,16 +56,31 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
             const movieId = row.original.id
             const overview = row.original.overview
             const posterUrl = row.original.poster_path
+            const movieTitle = row.original.title
             return (
-                <HoverCard>
+                <HoverCard >
                     {/* <HoverCardTrigger> */}
-                    <Link href={`/movie/details/${movieId}`}>
-                        {title}
-                    </Link>
-                    {/* </HoverCardTrigger> */}
-                    <HoverCardContent className="">
-                        <p className="text-sm">{overview}</p>
-                        <Image src={`${imageUrl}${posterUrl}`} alt={title} width={100} height={150} />
+                    
+                    <HoverCardTrigger>
+                        <Link href={`/movie/details/${movieId}`} className="hover:underline ">
+                            {title}
+                        </Link>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="w-full">
+                        <div className="flex h-60 w-96 min-h-[124px]">
+                            <div className="h-full">
+                                {posterUrl && <Image 
+                                    src={`${imageUrl}${posterUrl}`} 
+                                    alt={title} 
+                                    width={200}
+                                    height={300}
+                                    className="object-cover rounded-sm" 
+                                /> }
+                            </div>
+                            <p className=" ml-2 text-sm overflow-hidden truncate w-full line-clamp-6">
+                                {overview}
+                            </p>
+                        </div>
                     </HoverCardContent>
                 </HoverCard>
             )
@@ -160,6 +176,7 @@ export const CrewColumns: ColumnDef<MovieCrewDetails, any>[] = [
         cell: ({ row }) => {
             const title: string = row.getValue("title")
             const movieId = row.original.id
+            const movieTitle = row.original.title
             const overview = row.original.overview
             const posterUrl = row.original.poster_path
             return (
@@ -169,9 +186,21 @@ export const CrewColumns: ColumnDef<MovieCrewDetails, any>[] = [
                             {title}
                         </Link>
                     </HoverCardTrigger>
-                    <HoverCardContent className="">
-                        <p className="text-sm">{overview}</p>
-                        <Image src={`${imageUrl}${posterUrl}`} alt={title} width={100} height={150} />
+                    <HoverCardContent className="w-full">
+                        <div className="flex h-60 w-96">
+                            <div className="h-full">
+                                {posterUrl && <Image 
+                                    src={`${imageUrl}${posterUrl}`} 
+                                    alt={title} 
+                                    width={200}
+                                    height={300}
+                                    className="object-cover rounded-sm" 
+                                /> }
+                            </div>
+                            <p className=" ml-2 text-sm overflow-hidden truncate w-full line-clamp-6">
+                                {overview}
+                            </p>
+                        </div>
                     </HoverCardContent>
                 </HoverCard>
             )

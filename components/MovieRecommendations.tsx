@@ -19,7 +19,7 @@ const MovieRecommendations = ({movieRecommendations}: MovieRecommendationsProps)
                 <h1 className='mt-4'>Recommendations</h1>
                 <div className='flex flex-wrap gap-2 mt-5 items-center'>
                     {movieRecommendations.map((movie) => (
-                        <div key={movie.id} className='max-w-[136px] h-[200px] max-h-[200px]'>
+                        <div key={movie.id} className='w-[136px] h-[200px] '>
                             <PosterCard details={movie} width={100} height={200} />
                         </div>
                     ))}

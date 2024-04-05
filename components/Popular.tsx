@@ -30,14 +30,14 @@ const Popular = ({ popular }: PopularPropTypes) => {
 
     return (
         <>
-            <h1>Popular</h1>
+            
             <Carousel
                 plugins={[
                     Autoplay({
                         delay: 10_000
                     })
                 ]}
-                className="relative"
+                className="relative mt-5"
             >
                 <CarouselContent className="flex">
                     {populars.map((movie) => (

@@ -9,7 +9,8 @@ import { Toaster } from "@/components/ui/toaster";
 import NextSessionProvider from "@/provider/NextSessionProvider";
 import { getServerSession } from "next-auth";
 import AccountInfoProvider from "@/provider/AccountInfoProvider";
-
+import Footer from "@/components/Footer";
+import { Separator } from "@/components/ui/separator";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,6 +37,7 @@ export default async function RootLayout({
               <Navbar />
               <div className="flex flex-col justify-center items-center content-center self-center text-white container px-28">
                 {children}
+                <Footer/>
                 <Toaster />
               </div>
             </div>

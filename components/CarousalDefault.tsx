@@ -22,10 +22,10 @@ const CarousalDefault = ({movieList, title}: NowPlayingTypes) => {
     
     return (
         <>
-            <Carousel>
-                <div className='flex justify-between items-center'>
+            <Carousel className=' '>
+                <div className='flex justify-between items-center py-3'>
                     <h1>{title}</h1>
-                    <div className='gap-y-3'>
+                    <div className='gap-x-3'>
                         <CarouselPrevious />
                         <CarouselNext />
                     </div>

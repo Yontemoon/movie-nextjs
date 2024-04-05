@@ -42,10 +42,22 @@ const Navbar = () => {
                         <Link href="/">Icon</Link>
 
                     </div>
-                    <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+                    <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end gap-3">
+                        <Dialog>
+                            <DialogTrigger>
+                                <Search />
+                            </DialogTrigger>
+                            <DialogContent className="">
+                                <SearchDialog />
+                            </DialogContent>
+                        </Dialog>
+
+                        <Link href="/discover">
+                            <Discover />
+                        </Link>
                         {session.status === "authenticated" ?
                             <>
-                                <DropdownMenuTrigger className=" flex font-semibold text-center items-center uppercase text-sm  px-2 rounded-sm bg-[#14c78f] hover:bg-[#17ad7e] transition-all duration-75">
+                                <DropdownMenuTrigger className=" flex font-semibold text-center items-center uppercase text-sm  px-2 rounded-sm bg-[#14c78f] hover:bg-[#17ad7e] transition-all duration-75 h-[28px]">
                                     {session.data.user?.name} <SmallDownArrow />
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
@@ -90,20 +102,11 @@ const Navbar = () => {
                                     <DropdownMenuItem onClick={() => signOut()}>Sign Out</DropdownMenuItem>
                                 </DropdownMenuContent>
                             </> :
-                            <Link href="/login">Sign In</Link>
+                            <Link href="/login" className=" flex font-semibold text-center items-center uppercase text-sm  px-2 rounded-sm bg-[#b22524] hover:bg-[#b22424a9] transition-all duration-75 h-[28px]">
+                                Sign In
+                            </Link>
                         }
-                        <Dialog>
-                            <DialogTrigger>
-                                <Search />
-                            </DialogTrigger>
-                            <DialogContent className="">
-                                <SearchDialog />
-                            </DialogContent>
-                        </Dialog>
 
-                        <Link href="/discover">
-                            <Discover />
-                        </Link>
                     </div>
                 </div>
             </DropdownMenu>
