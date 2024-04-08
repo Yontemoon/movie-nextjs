@@ -28,12 +28,12 @@ const PersonPage = async ({ params }: PersonPageParams) => {
     const MiscCredits = sortPersonCrewInfo(movieCredits.crew)
     // console.log(personDetails)
     return (
-        <div className='grid grid-cols-4 gap-10 my-5 '>
+        <div className='lg:grid lg:grid-cols-4 gap-10 my-5 '>
             <div className=' top-10 col-span-1'>
                 <PersonInfoSection personDetails={personDetails} externalIds={externalIds}/>
             </div>
-            <div className='col-span-3'>
-                {/* <PersonDetails/> */}
+            <div className='lg:col-span-3 md:text-base text-xs'>
+                {/* <PersonDetails/> */} 
                 <PersonAccordianTable ActingCredits={ActingCredits} MiscCredits={MiscCredits}/>
 
             </div>

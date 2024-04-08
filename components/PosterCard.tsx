@@ -11,6 +11,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuLab
 import DefaultPoster from './DefaultPoster';
 import { useSession } from 'next-auth/react';
 import { useAccountInfoContext } from '@/provider/AccountInfoProvider';
+import { primaryGreen, primaryRed } from '@/library/primaryColors';
 
 
 import EditAccountIcons from './EditAccountIcons';
@@ -63,9 +64,9 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
         <DropdownMenu>
             <div
                 className={`
-                    relative h-full border-2 rounded-sm shadow-2xl w-full z-10
-                    ${inFavorite && "border-[#14c78f]"}
-                    ${inWatchlist && "border-[#b22524]"}
+                    relative h-full border-2 rounded-sm shadow-2xl w-full z-10 bg-slate-800
+                    ${inFavorite && `border-green`}
+                    ${inWatchlist && `border-red`}
                     
                 `}
                 onMouseEnter={handleMouseEnter}
@@ -89,7 +90,7 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
                             {`
                                 w-full h-full  transition-all  
                                   duration-300 cursor-pointer 
-                                  ${inRated && "brightness-50"}
+                                  ${inRated && "brightness-50 opacity-50"}
                                 ${className} 
                                 ${showHover ? 'opacity-50' : ''}
                                 ${isLoading ? " blur-lg " : " blur-0 "}

@@ -26,7 +26,7 @@ const PersonAccordianTable = ({ ActingCredits, MiscCredits }: PageProps) => {
     // console.log(ActingCredits)
     return (
 
-        <Accordion type="single" defaultValue="item-0" collapsible className='w-full'>
+        <Accordion type="single" defaultValue="item-0" collapsible className='w-full md:text-base text-xs'>
             <AccordionItem value="item-0">
                 <AccordionTrigger>Actor</AccordionTrigger>
                 <AccordionContent>

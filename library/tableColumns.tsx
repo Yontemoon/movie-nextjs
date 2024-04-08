@@ -24,7 +24,7 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
         header: ({ column }) => {
             return (
                 <h3
-                    className="hover:cursor-pointer flex"
+                    className="hover:cursor-pointer flex "
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Release Date
@@ -34,7 +34,7 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
         },
         cell: ({ row }) => {
             return (
-                <p>{row.getValue("release_date") ? formatDate(row.getValue("release_date")) : "TBD"}</p>
+                <p >{row.getValue("release_date") ? formatDate(row.getValue("release_date")) : "TBD"}</p>
             )
         }
     },
@@ -43,7 +43,7 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
         header: ({ column }) => {
             return (
                 <h3
-                    className="hover:cursor-pointer flex"
+                    className="hover:cursor-pointer flex "
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Title
@@ -63,7 +63,9 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
                     
                     <HoverCardTrigger>
                         <Link href={`/movie/details/${movieId}`} className="hover:underline ">
-                            {title}
+                            <p className="">
+                                {title}
+                            </p>
                         </Link>
                     </HoverCardTrigger>
                     <HoverCardContent className="w-full">
@@ -91,7 +93,7 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
         header: ({ column }) => {
             return (
                 <p
-                    className="hover:cursor-pointer flex"
+                    className="hover:cursor-pointer flex "
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Character Name
@@ -113,7 +115,7 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
         header: ({ column }) => {
             return (
                 <p
-                    className="hover:cursor-pointer text-right"
+                    className="hover:cursor-pointer text-right "
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Rating
@@ -132,7 +134,7 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
         accessorKey: "id",
         header: ({ column }) => {
             return (
-                <p>Your Lists</p>
+                <h3 className="">Your Lists</h3>
             )
         },
         cell: ({row}) => <EditAccountIconsPerson MovieDetails={row.original}/>

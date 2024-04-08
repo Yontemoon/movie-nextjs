@@ -32,7 +32,7 @@ const CarousalDefault = ({movieList, title}: NowPlayingTypes) => {
                 </div>
                 <CarouselContent>
                     {movieList.map((movie) => (
-                        <CarouselItem key={movie.id} className='md:basis-1/3 lg:basis-1/5'>
+                        <CarouselItem key={movie.id} className='lg:basis-1/5 md:basis-1/4 basis-1/3'>
                             <PosterCard details={movie} width={264} height={300}/>
                         </CarouselItem>
                     ))}

@@ -77,7 +77,7 @@ const PaginationControls = ({ hasNextPage, hasPrevPage, totalPages, currentPage 
             if (i === currentPage) {
                 paginationItems.push(
                     <PaginationItem key={i}>
-                        <PaginationLink className="bg-slate-100 rounded-md">{i}</PaginationLink>
+                        <PaginationLink className="bg-[#1e2022] rounded-md">{i}</PaginationLink>
                     </PaginationItem>
                 );
             } else if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
@@ -91,7 +91,7 @@ const PaginationControls = ({ hasNextPage, hasPrevPage, totalPages, currentPage 
     };
 
     return (
-        <Pagination>
+        <Pagination >
             <PaginationContent>
                 <PaginationItem>
                     {hasPrevPage && (

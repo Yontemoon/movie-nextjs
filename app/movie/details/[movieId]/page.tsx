@@ -31,16 +31,16 @@ const MovieDetailsPages = async ({params}: paramsProp) => {
     return (
         <>
             <MovieInfoBackdrop details={movieDetails}/>
-            <div className="grid grid-cols-8 gap-5 h-full items-start" >
-                <div className="sticky top-5 col-span-2" >
-                    <MovieInfoPoster details={movieDetails} className="col-span-1 min-w-[264px] min-h-[392px]" />
+            <div className="grid xl:grid-cols-8 grid-cols-5 gap-5 h-full items-start" >
+                <div className="xl:sticky top-5 xl:col-span-2 hidden xl:block" >
+                    <MovieInfoPoster details={movieDetails} className="" />
                 </div>
-                <div className="col-span-5">
+                <div className="xl:col-span-5 md:col-span-4 col-span-5">
                     <MovieInfo details={movieDetails} movieCredits={movieCredits}/>
                     <MovieDetailsTabContent movieId={params.movieId} details={movieDetails} movieCredits={movieCredits} movieAltTitles={movieAltTitles}/>
                     <MovieRecommendations movieRecommendations={movieRecommendations.results}/>
                 </div>
-                <div className='sticky top-5 col-span-1 bg-slate-200'>
+                <div className='md:sticky top-5 md:col-span-1 bg-slate-200 md:block hidden'>
                     CHANGE LATER
                 </div>
             </div>

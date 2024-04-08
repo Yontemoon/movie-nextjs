@@ -29,10 +29,10 @@ const DiscoverResults = async ({
         (`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${pageQuery}&sort_by=${sortByQuery}&with_genres=${genreQuery}&year=${yearQuery}&with_origin_country=${countryQuery}`)
 
     return (
-        <div>
-            <div className='flex-wrap flex gap-3 my-5 justify-center'>
+        < >
+            <div className='grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-3 py-3 justify-center overflow-hidden'>
                 {results.map((result: MovieDetailsType) => (
-                    <div key={result.id} className='w-[256px] h-[384px]'>
+                    <div key={result.id} className=' h-full w-full'>
                         <PosterCard  details={result} width={256} height={384} sizes="(min-width: 560px) 256px, (min-width: 520px) calc(415vw - 1985px), calc(54.5vw - 24px)"/>
                         
                     </div>
@@ -46,7 +46,7 @@ const DiscoverResults = async ({
                 totalPages={total_pages}
                 currentPage={page}
             />
-        </div>
+        </>
     );
 };
 

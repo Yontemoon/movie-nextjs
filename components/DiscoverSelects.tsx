@@ -62,7 +62,7 @@ const DiscoverSelects = () => {
     };
 
     return (
-        <span className="flex gap-2 mt-2">
+        <span className="lg:flex gap-2 mt-2 grid grid-cols-2">
             <Select onValueChange={(value) => {setGenreValue(value); handleSearchParams("genre", value)}} defaultValue={searchParams.get("genre")?.toString()} value={genreValue}>
                 <SelectTrigger className="w-[180px] bg-[#181a1b] border-[#363b3d]">
                     <SelectValue placeholder="All Genres" />
@@ -116,7 +116,7 @@ const DiscoverSelects = () => {
             
             {/* ADD A FILTER SECTION */}
             
-                <Button onClick={handleReset} variant={"destructive"}>
+                <Button onClick={handleReset} variant={"destructive"} className=" col-span-2">
                     Reset
                 </Button>
             

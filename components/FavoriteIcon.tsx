@@ -46,7 +46,7 @@ const FavoriteIcon = ({inFavorite, setInfavorite, details}: PropTypes) => {
                         setInfavorite(true)
                     }
 
-                    toast({ description: `Added '${details.title}' to your favorites.` })
+                    toast({ description: `Added '${details.title}' to your favorites.`})
                 }
             }
         } else {

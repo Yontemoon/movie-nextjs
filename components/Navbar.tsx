@@ -28,8 +28,8 @@ import {
 } from "@/components/ui/dialog"
 import Heart from "./icons/Heart";
 import Star from "./icons/Star";
-import { useSearchParams } from "next/navigation";
 import Search from "./icons/Search";
+import { primaryRed, secondaryRed, primaryGreen, secondaryGreen } from "@/library/primaryColors";
 
 const Navbar = () => {
     const session = useSession()
@@ -57,7 +57,7 @@ const Navbar = () => {
                         </Link>
                         {session.status === "authenticated" ?
                             <>
-                                <DropdownMenuTrigger className=" flex font-semibold text-center items-center uppercase text-sm  px-2 rounded-sm bg-[#14c78f] hover:bg-[#17ad7e] transition-all duration-75 h-[28px]">
+                                <DropdownMenuTrigger className={` flex font-semibold text-center items-center uppercase text-sm  px-2 rounded-sm bg-green hover:bg-secondaryGreen transition-all duration-100 h-[28px]`}>
                                     {session.data.user?.name} <SmallDownArrow />
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
@@ -102,7 +102,7 @@ const Navbar = () => {
                                     <DropdownMenuItem onClick={() => signOut()}>Sign Out</DropdownMenuItem>
                                 </DropdownMenuContent>
                             </> :
-                            <Link href="/login" className=" flex font-semibold text-center items-center uppercase text-sm  px-2 rounded-sm bg-[#b22524] hover:bg-[#b22424a9] transition-all duration-75 h-[28px]">
+                            <Link href="/login" className=" flex font-semibold text-center items-center uppercase text-sm  px-2 rounded-sm bg-red hover:bg-secondaryRed transition-all duration-75 h-[28px]">
                                 Sign In
                             </Link>
                         }
