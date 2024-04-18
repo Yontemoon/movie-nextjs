@@ -5,6 +5,7 @@ const LinkdinIcon = (props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     width={28}
     fill="currentColor"
+    className="hover:fill-red transition-all duration-300"
     viewBox="-2 -2 24 24"
     {...props}
   >

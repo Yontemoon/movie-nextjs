@@ -20,7 +20,7 @@ const Footer = () => {
                 </div>
                 <div className='flex flex-col items-center'>
                     {/* <h2 className='uppercase mb-3'>Privacy Policy</h2> */}
-                    <p className=''>This Website uses the TMDb API but is not endorsed or certified by TMDb.</p>
+                    <p className='text-center'>This Website uses the TMDb API but is not endorsed or certified by TMDb.</p>
                 </div>
                 <div>
                     Monte Movies 2024
