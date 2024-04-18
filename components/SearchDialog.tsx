@@ -2,28 +2,17 @@
 
 import { fetchData } from "@/library/db";
 import { Input } from "./ui/input";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { imageUrl } from "@/library/url";
 import { MovieDetailsType } from "@/library/modals";
-import { getGenreName } from "@/library/genres";
 import Link from "next/link";
 import { DialogClose } from "./ui/dialog";
 import Loading from "./skeleton/Loading";
-import { Button } from "./ui/button";
 import GenreButtons from "./GenreButtons";
-import {
-    Command,
-    CommandDialog,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-    CommandSeparator,
-    CommandShortcut,
-  } from "@/components/ui/command"
 import DefaultPoster from "./DefaultPoster";
+import { roundNumber, formatDate } from "@/utils/format";
+import Star from "./icons/Star";
 
 const SearchDialog = () => {
     const [searchQuery, setSearchQuery] = useState("")
@@ -52,45 +41,51 @@ const SearchDialog = () => {
         const delayedDebounce = setTimeout(fetchDataAsync, 1000);
 
         return () => clearTimeout(delayedDebounce);
-    },[searchQuery])
-    
+    }, [searchQuery])
+
 
     return (
         <div className="flex h-full w-full flex-col overflow-hidden rounded-md">
-            <Input onChange={(e) => setSearchQuery(e.target.value) }/>
-                <div className="h-[500px] overflow-y-auto overflow-x-hidden">
-                    {showLoading ? <Loading/> :
-                    !results ? 
-                        <span>There are currently no results...</span> : 
+            <Input onChange={(e) => setSearchQuery(e.target.value)} className="mt-4"/>
+            <div className="h-[500px] overflow-y-auto overflow-x-hidden mt-3">
+                {showLoading ? <Loading /> :
+                    !results ?
+                        <span>There are currently no results...</span> :
                         results.map((result) => (
                             <DialogClose key={result.id} asChild>
-                            <Link href={`/movie/details/${result.id}`}>
-                                <div className="flex p-1 gap-3">
-                                    {/* <div> */}
-                                    {result.poster_path === null ? <DefaultPoster movieTitle={`${result.title}`}/> :
-                                    <Image 
-                                        width={50}
-                                        height={100}
-                                        alt={result.title}
-                                        src={`${imageUrl}${result.poster_path}`}
-                                    />}
-                                    {/* </div> */}
-                                    <div className="flex flex-col w-full">
-                                        <h3>{result.title}</h3>
-                                        <div className="flex justify-between">
-                                            <p>{result.release_date}</p>
-                                            {/* ADD a star */}
-                                            <p>{result.vote_average}</p>
+                                <Link href={`/movie/details/${result.id}`}>
+                                    <div className="flex p-1 gap-3">
+                                        <div className="min-w-[120px] min-h-[180px]">
+                                            {result.poster_path === null ?
+                                                <DefaultPoster movieTitle={`${result.title}`} /> :
+                                                <Image
+                                                    width={150}
+                                                    height={200}
+                                                    sizes="(min-width: 1360px) 256px, (min-width: 780px) calc(23.21vw - 55px), (min-width: 740px) calc(35vw - 99px), (min-width: 380px) 147px, calc(16.67vw + 90px)" 
+                                                    className="rounded border border-gray-600 shadow-md hover:border-gray-500"
+                                                    alt={result.title}
+                                                    src={`${imageUrl}${result.poster_path}`}
+                                                />
+                                            }
+                                        </div>
+                                        <div className="flex flex-col w-full gap-y-3">
+                                            <h2 className="text-lg">{result.title}</h2>
+                                            <div className="flex justify-between">
+                                                <p className="uppercase text-sm">{formatDate(result.release_date)}</p>
+                                                {/* ADD a star */}
+                                                <p className="flex items-center"><Star noEffect={true} />{roundNumber(result.vote_average)}</p>
+
+                                            </div>
+
+                                            <GenreButtons movie={result} />
 
                                         </div>
-                                        <GenreButtons movie={result}/>
                                     </div>
-                                </div>
-                            </Link>
+                                </Link>
                             </DialogClose>
-                    ))
-                    }
-                </div>
+                        ))
+                }
+            </div>
         </div>
     );
 };

@@ -21,15 +21,12 @@ import SmallDownArrow from "./icons/SmallDownArrow";
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
 import Heart from "./icons/Heart";
 import Star from "./icons/Star";
 import Search from "./icons/Search";
-import { primaryRed, secondaryRed, primaryGreen, secondaryGreen } from "@/library/primaryColors";
+
 
 const Navbar = () => {
     const session = useSession()
@@ -71,7 +68,7 @@ const Navbar = () => {
                                                 <span className="mr-3">
                                                     Your Watchlist
                                                 </span>
-                                                <Eye watched={true} />
+                                                <Eye noEffect={true} />
 
                                             </DropdownMenuItem>
                                         </Link>
@@ -81,7 +78,7 @@ const Navbar = () => {
                                                 <span className="">
                                                     Your Favorites
                                                 </span>
-                                                <Heart watched={true} />
+                                                <Heart noEffect={true} />
 
 
                                             </DropdownMenuItem>
@@ -92,7 +89,7 @@ const Navbar = () => {
                                                 <span className="">
                                                     Your Ratings
                                                 </span>
-                                                <Star watched={true} />
+                                                <Star noEffect={true} />
 
 
                                             </DropdownMenuItem>

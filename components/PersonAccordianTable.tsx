@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/accordion"
 import { MovieCastDetails, MovieCrewDetails } from "@/library/modals";
 import CreditTable from "./CreditTable";
-import { CastColumns, CrewColumns } from "@/library/tableColumns";
+import { CastColumns, CrewColumns } from "@/components/tableColumns";
 import { useAccountInfoContext } from "@/provider/AccountInfoProvider";
 import { DropdownMenu } from "./ui/dropdown-menu";
 

@@ -17,17 +17,20 @@ const RatingsPage = () => {
         setCurrentRatedList(rated)
     },[session, rated])
     return (
-        <>
+        <section className="gap-y-2">
+            <h1>Your Ratings</h1>
             <p>You have {currentRatedList?.length} films in your favorite list.</p>
-            <div className='flex flex-wrap gap-1'>
+            <div className='grid xl:grid-cols-8 lg:grid-cols-6 grid-cols-4 gap-1 min-w-[500px] min-h-screen'>
                 {currentRatedList?.map((movie) => (
                     <div key={movie.id}>
-                        <PosterCard details={movie} width={125} height={192}  />
+                        <div className="w-[129px] h-[196px]">
+                            <PosterCard details={movie} width={125} height={192} dimPoster={false}/>
+                        </div>
                         <p>{movie.rating}</p>
                     </div>
                 ))}
             </div>
-        </>
+        </section>
     );
 };
 

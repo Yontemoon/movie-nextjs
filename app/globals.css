@@ -101,3 +101,7 @@ h1 {
   color: rgb(229 231 235 / var(--tw-text-opacity));
   cursor: pointer;
 }
+
+/* Link {
+  font-family: var(--font-work_sans);
+} */

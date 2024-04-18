@@ -11,6 +11,7 @@ import { getServerSession } from "next-auth";
 import AccountInfoProvider from "@/provider/AccountInfoProvider";
 import Footer from "@/components/Footer";
 import { Separator } from "@/components/ui/separator";
+import { work_sans } from "@/utils/font";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +33,7 @@ export default async function RootLayout({
     <html lang="en">
       <NextSessionProvider>
         <AccountInfoProvider>
-          <body className={`${inter.className} bg-[#0a2f52] `}>
+          <body className={`${work_sans.className} bg-[#0a2f52]`}>
             <div className="w-screen  flex flex-col ">
               <Navbar />
               <div className="flex flex-col justify-center items-center content-center self-center text-white container px-28">

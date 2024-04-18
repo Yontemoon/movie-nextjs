@@ -4,7 +4,7 @@ import * as React from "react"
 import { SVGProps, useState } from "react"
 import { secondaryGreen, primaryGreen } from "@/library/primaryColors"
 
-const Heart = ({watched = false}, props: SVGProps<SVGSVGElement>) => {
+const Heart = ({watched = false, noEffect = false}, props: SVGProps<SVGSVGElement>) => {
 
 
   const [isHovered, setIsHovered] = useState(false);
@@ -17,10 +17,10 @@ const Heart = ({watched = false}, props: SVGProps<SVGSVGElement>) => {
     setIsHovered(false);
   };
  return ( <svg
-    className={`hover:cursor-pointer transition-all duration-500`}
+    className={` transition-all duration-500`}
     xmlns="http://www.w3.org/2000/svg"
     width={28}
-    fill={watched ? isHovered ? secondaryGreen : primaryGreen : (isHovered ? primaryGreen : "currentColor") }
+    fill={ noEffect ? primaryGreen : (watched ? isHovered ? secondaryGreen : primaryGreen : (isHovered ? primaryGreen : "currentColor")) }
     viewBox="-2 -4 24 24"
     onMouseEnter={handleMouseEnter}
     onMouseLeave={handleMouseLeave}

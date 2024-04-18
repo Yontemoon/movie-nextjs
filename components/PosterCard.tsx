@@ -24,9 +24,10 @@ type PosterProps = {
     height: number;
     sizes?: string;
     pointerEvent?: boolean
+    dimPoster?: boolean
 }
 
-const PosterCard = ({ details, className, width, height, sizes, pointerEvent = true, }: PosterProps) => {
+const PosterCard = ({ details, className, width, height, sizes, pointerEvent = true, dimPoster = true}: PosterProps) => {
     const session = useSession()
     const { watchlist, favorites, rated } = useAccountInfoContext()
     const [isLoading, setIsLoading] = useState(true)
@@ -90,7 +91,7 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
                             {`
                                 w-full h-full  transition-all  
                                   duration-300 cursor-pointer 
-                                  ${inRated && "brightness-50 opacity-50"}
+                                  ${dimPoster && inRated && "brightness-50 opacity-50"}
                                 ${className} 
                                 ${showHover ? 'opacity-50' : ''}
                                 ${isLoading ? " blur-lg " : " blur-0 "}

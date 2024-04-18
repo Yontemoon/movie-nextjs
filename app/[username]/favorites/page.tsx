@@ -8,16 +8,17 @@ const FavoritesPage = () => {
     const { favorites, setFavorites } = useAccountInfoContext()
     console.log(favorites)
     return (
-        <>
+        <section>
+            <h1>Your Favorites</h1>
             <p>You have {favorites?.length} films in your favorite list.</p>
-            <div className='flex flex-wrap gap-1'>
+            <div className='grid xl:grid-cols-8 lg:grid-cols-6 grid-cols-4 gap-1 min-w-[500px] min-h-screen'>
                 {favorites?.map((movie) => (
-                    <div key={movie.id}>
-                        <PosterCard details={movie} width={256} height={384} sizes="(min-width: 540px) 256px, calc(54.55vw - 24px)" />
+                    <div className="w-[129px] h-[196px]" key={movie.id}>
+                        <PosterCard details={movie} width={125} height={192} />
                     </div>
                 ))}
             </div>
-        </>
+        </section>
     );
 };
 

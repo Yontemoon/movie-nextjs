@@ -5,7 +5,7 @@ import { SVGProps, useState } from "react"
 import { primaryRed, secondaryRed } from "@/library/primaryColors"
 
 
-const Eye = ({ watched = false }, props: SVGProps<SVGSVGElement>) => {
+const Eye = ({ watched = false, noEffect = false}, props: SVGProps<SVGSVGElement>) => {
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -19,10 +19,10 @@ const Eye = ({ watched = false }, props: SVGProps<SVGSVGElement>) => {
 
   return (
     <svg
-      className="hover:cursor-pointer transition-all duration-500"
+      className=" transition-all duration-500"
       xmlns="http://www.w3.org/2000/svg"
       width={28}
-      fill={watched ? isHovered ? secondaryRed :primaryRed : (isHovered ? primaryRed : "currentColor")}
+      fill={ noEffect ? primaryRed : (watched ? isHovered ? secondaryRed :primaryRed : (isHovered ? primaryRed : "currentColor"))}
       viewBox="-2 -6 24 24"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

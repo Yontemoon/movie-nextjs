@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react'
 import { useToast } from './ui/use-toast'
 import { MovieDetailsType, RatedType } from '@/library/modals'
 import { Button } from './ui/button'
-import { addToList, removeFromList } from '@/library/crud'
+import { addToRatedList, removeFromList } from '@/library/crud'
 import { localFetch } from '@/library/db'
 
 
@@ -49,7 +49,7 @@ const StarRating = ({ movieDetails, inRated, setInRated, inWatchlist, setInWatch
                     rating: rate * 2
                 }
                 if (rated) {
-                    const newRatedList = addToList(rated, newRatedMovie) as RatedType[];
+                    const newRatedList = addToRatedList(rated, newRatedMovie) as RatedType[];
                     setRated(newRatedList)
 
                 }
@@ -88,7 +88,6 @@ const StarRating = ({ movieDetails, inRated, setInRated, inWatchlist, setInWatch
         <div >
             <Rating
                 onClick={handleRating}
-                // onPointerMove={onPointerMove}
                 SVGstyle={{ display: 'inline-block' }}
                 iconsCount={5}
                 transition={true}

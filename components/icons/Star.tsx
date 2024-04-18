@@ -2,7 +2,7 @@ import * as React from "react"
 import { SVGProps, useState } from "react"
 import { primaryYellow, secondaryYellow } from "@/library/primaryColors";
 
-const Star = ({ watched = false }, props: SVGProps<SVGSVGElement>) => {
+const Star = ({ watched = false, noEffect = false }, props: SVGProps<SVGSVGElement>) => {
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -17,7 +17,7 @@ const Star = ({ watched = false }, props: SVGProps<SVGSVGElement>) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={28}
-      fill={watched ? (isHovered ? secondaryYellow : primaryYellow) : (isHovered ? primaryYellow: "currentColor") }
+      fill={ noEffect ? primaryYellow : (watched ? (isHovered ? secondaryYellow : primaryYellow) : (isHovered ? primaryYellow: "currentColor")) }
       viewBox="-2 -2 24 24"
       className="transition-all duration-500"
       onMouseEnter={handleMouseEnter}

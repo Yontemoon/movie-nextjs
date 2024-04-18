@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
-import { MovieCastDetails, MovieCrewDetails } from "./modals"
+import { MovieCastDetails, MovieCrewDetails } from "../library/modals"
 import { formatDate, roundNumber } from "@/utils/format"
 import Link from "next/link"
 import {
@@ -11,11 +11,12 @@ import {
     HoverCardContent,
     HoverCardTrigger,
 } from "@/components/ui/hover-card"
-import { imageUrl } from "./url"
+import { imageUrl } from "../library/url"
 import Image from "next/image"
-import EditAccountIcons from "@/components/EditAccountIcons"
+import Star from "./icons/Star"
 import EditAccountIconsPerson from "@/components/EditAccountIconsPerson"
-import DefaultPoster from "@/components/DefaultPoster"
+
+import { space_mono } from "@/utils/font"
 
 
 export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
@@ -24,7 +25,7 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
         header: ({ column }) => {
             return (
                 <h3
-                    className="hover:cursor-pointer flex "
+                    className="hover:cursor-pointer flex whitespace-nowrap"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Release Date
@@ -43,7 +44,7 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
         header: ({ column }) => {
             return (
                 <h3
-                    className="hover:cursor-pointer flex "
+                    className="hover:cursor-pointer flex whitespace-nowrap"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Title
@@ -56,21 +57,21 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
             const movieId = row.original.id
             const overview = row.original.overview
             const posterUrl = row.original.poster_path
-            const movieTitle = row.original.title
+            
             return (
                 <HoverCard >
                     {/* <HoverCardTrigger> */}
                     
                     <HoverCardTrigger>
-                        <Link href={`/movie/details/${movieId}`} className="hover:underline ">
+                        <Link href={`/movie/details/${movieId}`} className={`${space_mono.className} underline hover:text-secondaryRed`}>
                             <p className="">
                                 {title}
                             </p>
                         </Link>
                     </HoverCardTrigger>
                     <HoverCardContent className="w-full">
-                        <div className="flex h-60 w-96 min-h-[124px]">
-                            <div className="h-full">
+                        <div className="flex h-56 w-96 min-h-[124px]">
+                            <div className="h-full content-center">
                                 {posterUrl && <Image 
                                     src={`${imageUrl}${posterUrl}`} 
                                     alt={title} 
@@ -79,7 +80,7 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
                                     className="object-cover rounded-sm" 
                                 /> }
                             </div>
-                            <p className=" ml-2 text-sm overflow-hidden truncate w-full line-clamp-6">
+                            <p className=" ml-4 text-sm  my-4 w-full  text-wrap text-ellipsis overflow-auto">
                                 {overview}
                             </p>
                         </div>
@@ -92,13 +93,13 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
         accessorKey: 'character',
         header: ({ column }) => {
             return (
-                <p
-                    className="hover:cursor-pointer flex "
+                <h3
+                    className="hover:cursor-pointer flex whitespace-nowrap"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Character Name
                     <ArrowUpDown className="ml-2 h-4 w-4" />
-                </p>
+                </h3>
             )
         },
         cell: ({ row }) => {
@@ -114,19 +115,19 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
         accessorKey: 'vote_average',
         header: ({ column }) => {
             return (
-                <p
-                    className="hover:cursor-pointer text-right "
+                <h3
+                    className="hover:cursor-pointer flex whitespace-nowrap items-center"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Rating
+                    <Star noEffect={true}/>Rating
                     <ArrowUpDown className="ml-2 h-4 w-4" />
-                </p>
+                </h3>
             )
         },
         cell: ({ row }) => {
             const roundedNumber = roundNumber(row.getValue("vote_average"))
             return (
-                <p className="text-right">{roundedNumber === 0 ? "TBD" : roundedNumber}</p>
+                <p className="">{roundedNumber === 0 ? "TBD" : roundedNumber}</p>
             )
         }
     },
@@ -134,7 +135,7 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
         accessorKey: "id",
         header: ({ column }) => {
             return (
-                <h3 className="">Your Lists</h3>
+                <h3 className="whitespace-nowrap text-right">Your Lists</h3>
             )
         },
         cell: ({row}) => <EditAccountIconsPerson MovieDetails={row.original}/>
@@ -182,15 +183,17 @@ export const CrewColumns: ColumnDef<MovieCrewDetails, any>[] = [
             const overview = row.original.overview
             const posterUrl = row.original.poster_path
             return (
-                <HoverCard>
+                <HoverCard >
                     <HoverCardTrigger>
-                        <Link href={`/movie/details/${movieId}`} className="hover:underline ">
-                            {title}
+                        <Link href={`/movie/details/${movieId}`} className={`${space_mono.className} underline hover:text-secondaryRed`}>
+                            <p className="">
+                                {title}
+                            </p>
                         </Link>
                     </HoverCardTrigger>
                     <HoverCardContent className="w-full">
-                        <div className="flex h-60 w-96">
-                            <div className="h-full">
+                        <div className="flex h-56 w-96 min-h-[124px]">
+                            <div className="h-full content-center">
                                 {posterUrl && <Image 
                                     src={`${imageUrl}${posterUrl}`} 
                                     alt={title} 
@@ -199,7 +202,7 @@ export const CrewColumns: ColumnDef<MovieCrewDetails, any>[] = [
                                     className="object-cover rounded-sm" 
                                 /> }
                             </div>
-                            <p className=" ml-2 text-sm overflow-hidden truncate w-full line-clamp-6">
+                            <p className=" ml-4 text-sm  my-4 w-full  text-wrap text-ellipsis overflow-auto">
                                 {overview}
                             </p>
                         </div>
@@ -212,13 +215,13 @@ export const CrewColumns: ColumnDef<MovieCrewDetails, any>[] = [
         accessorKey: 'job',
         header: ({ column }) => {
             return (
-                <p
+                <h3
                     className="hover:cursor-pointer flex"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Job
                     <ArrowUpDown className="ml-2 h-4 w-4" />
-                </p>
+                </h3>
             )
         },
         cell: ({ row }) => {
@@ -234,19 +237,19 @@ export const CrewColumns: ColumnDef<MovieCrewDetails, any>[] = [
         accessorKey: 'vote_average',
         header: ({ column }) => {
             return (
-                <p
-                    className="hover:cursor-pointer text-right"
+                <h3
+                    className="hover:cursor-pointer flex whitespace-nowrap items-center"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Rating
+                    <Star noEffect={true}/>Rating
                     <ArrowUpDown className="ml-2 h-4 w-4" />
-                </p>
+                </h3>
             )
         },
         cell: ({ row }) => {
             const roundedNumber = roundNumber(row.getValue("vote_average"))
             return (
-                <p className="text-right">{roundedNumber === 0 ? "TBD" : roundedNumber}</p>
+                <p className="">{roundedNumber === 0 ? "TBD" : roundedNumber}</p>
             )
         }
     },
@@ -254,7 +257,7 @@ export const CrewColumns: ColumnDef<MovieCrewDetails, any>[] = [
         accessorKey: "id",
         header: ({ column }) => {
             return (
-                <p>Your Lists</p>
+                <h3>Your Lists</h3>
             )
         },
         cell: ({row}) => <EditAccountIconsPerson MovieDetails={row.original}/>

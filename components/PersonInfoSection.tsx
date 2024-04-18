@@ -4,6 +4,7 @@ import { PersonDetailsType, ExternalIdsTypes } from "@/library/modals";
 import Image from "next/image";
 import { imageUrl } from "@/library/url";
 import { useState } from "react";
+import { bree_serif, patua_one } from "@/utils/font";
 
 type PropTypes = {
     personDetails: PersonDetailsType;
@@ -19,7 +20,7 @@ const PersonInfoSection = ({ personDetails, externalIds }: PropTypes) => {
 
             <div className="">
                 <p className="uppercase text-sm">credits of</p>
-                <h2 className="text-lg">{personDetails.name}</h2>
+                <h2 className={`${patua_one.className} text-xl`}>{personDetails.name}</h2>
             </div>
             <div className="lg:block gap-2 flex">            
                 <Image
