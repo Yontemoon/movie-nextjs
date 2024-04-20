@@ -38,12 +38,12 @@ const MovieDetailsTabContent = ({ movieId, details, movieCredits, movieAltTitles
     }, [pathname])
 
     return (
-        <section className="text-xs">
-            <header className="flex gap-3 mt-7 uppercase ">
-                <p onClick={() => setCurrent("cast")} className={`${current === "cast" && "underline"} hover:cursor-pointer`}>Cast</p>
-                <p onClick={() => setCurrent("crew")} className={`${current === "crew" && "underline"} hover:cursor-pointer`}>Crew</p>
-                <p onClick={() => setCurrent("info")} className={`${current === "info" && "underline"} hover:cursor-pointer`}>Details</p>
-                <p onClick={() => setCurrent("genres")} className={`${current === "genres" && "underline"} hover:cursor-pointer`}>Genres</p>
+        <section className="text-sm">
+            <header className="flex gap-3 mt-7 uppercase">
+                <p onClick={() => setCurrent("cast")} className={`${current === "cast" && "underline text-green"} hover:cursor-pointer hover:text-green`}>Cast</p>
+                <p onClick={() => setCurrent("crew")} className={`${current === "crew" && "underline text-green"} hover:cursor-pointer hover:text-green`}>Crew</p>
+                <p onClick={() => setCurrent("info")} className={`${current === "info" && "underline text-green"} hover:cursor-pointer hover:text-green`}>Details</p>
+                <p onClick={() => setCurrent("genres")} className={`${current === "genres" && "underline text-green"} hover:cursor-pointer hover:text-green`}>Genres</p>
             </header>
             <Separator />
             {

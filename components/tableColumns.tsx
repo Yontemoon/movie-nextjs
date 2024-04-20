@@ -25,7 +25,7 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
         header: ({ column }) => {
             return (
                 <h3
-                    className="hover:cursor-pointer flex whitespace-nowrap"
+                    className="hover:cursor-pointer flex whitespace-nowrap "
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Release Date

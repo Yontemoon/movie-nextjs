@@ -71,7 +71,7 @@ const SearchDialog = () => {
                                         <div className="flex flex-col w-full gap-y-3">
                                             <h2 className="text-lg">{result.title}</h2>
                                             <div className="flex justify-between">
-                                                <p className="uppercase text-sm">{formatDate(result.release_date)}</p>
+                                                <p className="uppercase text-sm">{result.release_date === "" ? "TBD" : formatDate(result.release_date)}</p>
                                                 {/* ADD a star */}
                                                 <p className="flex items-center"><Star noEffect={true} />{roundNumber(result.vote_average)}</p>
 

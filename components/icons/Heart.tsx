@@ -20,7 +20,7 @@ const Heart = ({watched = false, noEffect = false}, props: SVGProps<SVGSVGElemen
     className={` transition-all duration-500`}
     xmlns="http://www.w3.org/2000/svg"
     width={28}
-    fill={ noEffect ? primaryGreen : (watched ? isHovered ? secondaryGreen : primaryGreen : (isHovered ? primaryGreen : "currentColor")) }
+    fill={ noEffect ? primaryGreen : (watched ? isHovered ? secondaryGreen : primaryGreen : (isHovered ? primaryGreen : "white")) }
     viewBox="-2 -4 24 24"
     onMouseEnter={handleMouseEnter}
     onMouseLeave={handleMouseLeave}

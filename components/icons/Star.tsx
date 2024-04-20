@@ -17,7 +17,7 @@ const Star = ({ watched = false, noEffect = false }, props: SVGProps<SVGSVGEleme
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={28}
-      fill={ noEffect ? primaryYellow : (watched ? (isHovered ? secondaryYellow : primaryYellow) : (isHovered ? primaryYellow: "currentColor")) }
+      fill={ noEffect ? primaryYellow : (watched ? (isHovered ? secondaryYellow : primaryYellow) : (isHovered ? primaryYellow: "white")) }
       viewBox="-2 -2 24 24"
       className="transition-all duration-500"
       onMouseEnter={handleMouseEnter}

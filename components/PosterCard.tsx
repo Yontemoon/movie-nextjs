@@ -112,7 +112,7 @@ const PosterCard = ({ details, className, width, height, sizes, pointerEvent = t
 
                 {showHover && (
                     <>
-                        <Card className='absolute bottom-3 inset-x-3 transition-opacity duration-700 z-10 bg-opacity-60'>
+                        <Card className='absolute bottom-3 inset-x-3 transition-opacity duration-700 z-10 bg-black bg-opacity-80 border-black'>
 
                             <div className='flex justify-center gap-3'>
                                 <EditAccountIcons

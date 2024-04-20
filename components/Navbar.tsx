@@ -26,6 +26,7 @@ import {
 import Heart from "./icons/Heart";
 import Star from "./icons/Star";
 import Search from "./icons/Search";
+import { rem,  } from "@/utils/font";
 
 
 const Navbar = () => {
@@ -34,12 +35,14 @@ const Navbar = () => {
     return (
         <header className="top-0 z-10 w-full border-b border-border/40">
             <DropdownMenu>
-                <div className="container h-14 flex max-w-screen-2xl items-center px-44">
-                    <div className="mr-4 hidden md:flex">
-                        <Link href="/">Icon</Link>
-
+                <div className="container h-14 flex max-w-screen-2xl items-center ">
+                    <div className="mr-4 md:flex hidden">
+                        <Link href="/" className={`${rem.className} text-red font-bold text-xl tracking-wider hover:decoration-dashed transition-all duration-300`}>MONTEMovies</Link>
                     </div>
-                    <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end gap-3">
+                    <div className="mr-4 md:hidden flex">
+                        <Link href="/" className={`${rem.className} text-red font-bold text-xl tracking-wider hover:decoration-dashed`}>Mm</Link>
+                    </div>
+                    <div className="flex flex-1 items-center  space-x-2 justify-end gap-3">
                         <Dialog>
                             <DialogTrigger>
                                 <Search />

@@ -39,7 +39,7 @@ function CreditTable <TData, TValue> ({ data, columns }: DataTableProps<TData, T
     })
     
     return (
-        <Table>
+        <Table className="lg:text-sm text-xs">
             <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
                     <TableRow key={headerGroup.id}>

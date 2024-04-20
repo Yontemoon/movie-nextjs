@@ -22,7 +22,7 @@ const Eye = ({ watched = false, noEffect = false}, props: SVGProps<SVGSVGElement
       className=" transition-all duration-500"
       xmlns="http://www.w3.org/2000/svg"
       width={28}
-      fill={ noEffect ? primaryRed : (watched ? isHovered ? secondaryRed :primaryRed : (isHovered ? primaryRed : "currentColor"))}
+      fill={ noEffect ? primaryRed : (watched ? isHovered ? secondaryRed :primaryRed : (isHovered ? primaryRed : "white"))}
       viewBox="-2 -6 24 24"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

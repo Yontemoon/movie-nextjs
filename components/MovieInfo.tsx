@@ -33,9 +33,9 @@ const MovieInfo = ({ details, movieCredits }: MovieInfoProps) => {
                             <Link href={`/discover?year=${getYear(details.release_date)}&page=1`} className={`${space_mono.className} underline hover:text-secondaryRed`}>
                                 <p>{getYear(details.release_date)}</p>
                             </Link>
-                            <div className=' whitespace-nowrap'>
+                            <div className=' whitespace-nowrap gap-x-y'>
                                 Directed by {directors.map((director) => (
-                                    <Link href={`/person/${director.id}`}key={director.id} className={`${space_mono.className} underline hover:text-secondaryRed`}>
+                                    <Link href={`/person/${director.id}`}key={director.id} className={`${space_mono.className} underline hover:text-secondaryRed mx-2`}>
                                         {director.name}
                                     </Link>
                                 ))}

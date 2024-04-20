@@ -23,6 +23,7 @@ const config = {
         'secondaryGreen': '#17ad7e',
         'red': '#b22524',
         'secondaryRed': '#8e1d22',
+        'backgroundColor': '#0a2f52',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -16,7 +16,7 @@ import { work_sans } from "@/utils/font";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Monte Movie - Home",
+  title: "Monte Movies",
   description: "Home Page",
 };
 
@@ -33,10 +33,10 @@ export default async function RootLayout({
     <html lang="en">
       <NextSessionProvider>
         <AccountInfoProvider>
-          <body className={`${work_sans.className} bg-[#0a2f52]`}>
-            <div className="w-screen  flex flex-col ">
+          <body className={`${work_sans.className} bg-backgroundColor`}>
+            <div className="w-full flex flex-col ">
               <Navbar />
-              <div className="flex flex-col justify-center items-center content-center self-center text-white container px-28">
+              <div className="flex flex-col justify-center items-center content-center self-center text-white container px-28 ">
                 {children}
                 <Footer/>
                 <Toaster />
