@@ -40,8 +40,7 @@ export const DELETE = async (request: NextRequest, { params }: { params: { accou
             method: 'POST',
             headers: {
                 accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNjE1OWUxMzNmY2U1MWYzYjgzNTVjYzI1ZTBjMmZmNCIsInN1YiI6IjU0YmU2ZTE3YzNhMzY4NmM2MTAwY2I0ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.EwXgaHVl28xvznKNf7di1MaK1J5LMZ0uygw4cADqLTU'
+                'Content-Type': 'application/json',               
             },
             body: JSON.stringify({
                 media_type: 'movie',

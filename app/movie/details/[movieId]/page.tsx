@@ -1,4 +1,5 @@
 "use server"
+
 import React from 'react';
 import MovieInfo from "@/components/MovieInfo";
 import MovieRecommendations from "@/components/MovieRecommendations";
@@ -34,7 +35,7 @@ const MovieDetailsPages = async ({params}: paramsProp) => {
         <>
             <MovieInfoBackdrop details={movieDetails}/>
             <div className="grid xl:grid-cols-8 grid-cols-5 gap-5 h-full items-start" >
-                <div className="xl:sticky top-5 xl:col-span-2 hidden xl:block" >
+                <div className="xl:sticky top-20 xl:col-span-2 hidden xl:block" >
                     <MovieInfoPoster details={movieDetails} />
                 </div>
                 <div className="xl:col-span-5 md:col-span-4 col-span-5">

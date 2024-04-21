@@ -80,6 +80,7 @@ h1 {
 }
 
 .text-box {
+  max-height: 24px;
   box-sizing: border-box;
   border-radius: calc(var(--radius) - 4px);
   max-width: 100%;

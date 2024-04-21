@@ -7,11 +7,7 @@ export type MovieDetailsType = {
     original_title: string;
     overview: string;
     popularity: number;
-    spoken_languages: {
-        english_name: string
-        iso_639_1: string
-        name: string
-    }[]
+    spoken_languages: SpokenLanguagesType[]
     poster_path: string,
     release_date: string,
     title: string,
@@ -32,6 +28,12 @@ export type MovieDetailsType = {
     budget: number
     revenue: number
     genre_ids: number[]
+}
+
+export type SpokenLanguagesType = {
+    english_name: string
+    iso_639_1: string
+    name: string
 }
 
 type genre = {
