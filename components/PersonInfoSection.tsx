@@ -30,7 +30,7 @@ const PersonInfoSection = ({ personDetails, externalIds }: PropTypes) => {
                     width={300} height={400}
                     priority
                 />}
-                {personDetails.biography === "" ? <div>Currenly no biography is present.</div> :
+                {personDetails.biography === "" ? <div className="text-sm ml-3 mt-3">No biography is present for {personDetails.name}.</div> :
                 <div className="lg:mt-5 lg:cursor-pointer ml-5" onClick={() => setExpandBio(!expandBio)}>
                     <p className={`text-sm whitespace-pre-line ${!expandBio ? "lg:line-clamp-3 line-clamp-[20]" : ""} overflow-hidden transition-transform`} >
                         {personDetails.biography}

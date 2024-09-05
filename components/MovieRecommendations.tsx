@@ -11,7 +11,7 @@ type MovieRecommendationsProps = {
 }
 
 const MovieRecommendations = ({movieRecommendations}: MovieRecommendationsProps) => {
-    console.log(movieRecommendations)
+    
     
     return (
         <section>

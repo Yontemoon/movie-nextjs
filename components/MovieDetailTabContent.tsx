@@ -12,14 +12,13 @@ import DetailsComponent from "./MovieDetailTabContentChildren.tsx/DetailsCompone
 import GenreComponent from "./MovieDetailTabContentChildren.tsx/GenreComponent";
 
 type PropType = {
-    movieId: string
     details: MovieDetailsType
     movieCredits: PersonCreditDetailsType
     movieAltTitles: AlternativeMovieTitlesType
     
 }
 
-const MovieDetailsTabContent = ({ movieId, details, movieCredits, movieAltTitles }: PropType) => {
+const MovieDetailsTabContent = ({ details, movieCredits, movieAltTitles }: PropType) => {
     
     const pathname = usePathname()
     const crew = sortMovieCrewInfo(movieCredits.crew)

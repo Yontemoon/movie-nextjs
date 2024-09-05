@@ -3,10 +3,12 @@ import { Metadata } from 'next';
 
 type PropType = {
     children: React.ReactNode
+
 }
 
+const MovieDetailLayout = async ({children}: PropType) => {
+   
 
-const MovieDetailLayout = ({children}: PropType) => {
     return (
         <>
             {children}

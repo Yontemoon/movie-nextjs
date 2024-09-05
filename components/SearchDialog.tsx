@@ -29,7 +29,7 @@ const SearchDialog = () => {
             try {
                 const fetchRequest = await fetchData(`/search/movie?query=${searchQuery}&include_adult=false&language=en-US&page=1`);
                 const results = fetchRequest.results;
-                console.log(results);
+                
                 setResults(results);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -55,28 +55,26 @@ const SearchDialog = () => {
                             <DialogClose key={result.id} asChild>
                                 <Link href={`/movie/details/${result.id}`}>
                                     <div className="flex p-1 gap-3">
-                                        <div className="min-w-[120px] min-h-[180px]">
+                                        <div className="w-[79.15px] max-w-[79.15px] max-h-[120px] h-[120px] inline-block">
                                             {result.poster_path === null ?
                                                 <DefaultPoster movieTitle={`${result.title}`} /> :
                                                 <Image
-                                                    width={150}
+                                                    width={100}
                                                     height={200}
-                                                    sizes="(min-width: 1360px) 256px, (min-width: 780px) calc(23.21vw - 55px), (min-width: 740px) calc(35vw - 99px), (min-width: 380px) 147px, calc(16.67vw + 90px)" 
-                                                    className="rounded border border-gray-600 shadow-md hover:border-gray-500"
+                                                    // sizes="(min-width: 1360px) 256px, (min-width: 780px) calc(23.21vw - 55px), (min-width: 740px) calc(35vw - 99px), (min-width: 380px) 147px, calc(16.67vw + 90px)" 
+                                                    className="rounded border border-gray-600 shadow-md hover:border-gray-500 w-[79.15px] max-w-[79.15px] max-h-[120px] h-[120px] inline-block"
                                                     alt={result.title}
                                                     src={`${imageUrl}${result.poster_path}`}
                                                 />
                                             }
                                         </div>
-                                        <div className="flex flex-col w-full gap-y-3">
+                                        <div className="flex flex-col w-full mx-1">
                                             <h2 className="text-lg">{result.title}</h2>
-                                            <div className="flex justify-between">
+                                            <div className="flex justify-between pb-3 items-center">
                                                 <p className="uppercase text-sm">{result.release_date === "" ? "TBD" : formatDate(result.release_date)}</p>
                                                 {/* ADD a star */}
                                                 <p className="flex items-center"><Star noEffect={true} />{roundNumber(result.vote_average)}</p>
-
                                             </div>
-
                                             <GenreButtons movie={result} />
 
                                         </div>

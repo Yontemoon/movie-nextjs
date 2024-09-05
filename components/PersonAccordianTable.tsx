@@ -42,19 +42,19 @@ const PersonAccordianTable = ({ ActingCredits, MiscCredits }: PageProps) => {
             credits: sortedCredits,
         };
     });
-    console.log(newMiscCredits)
+    
 
     return (
 
-        <Accordion type="single" defaultValue="item-0" collapsible className='w-full '>
-            {ActingCredits.length > 0  && <AccordionItem value="item-0">
+        <Accordion type="single" defaultValue={ActingCredits.length > 0 ? "accordian-0": "accordian-1"} collapsible className='w-full '>
+            {ActingCredits.length > 0  && <AccordionItem value="accordian-0">
                 <AccordionTrigger>Actor</AccordionTrigger>
                 <AccordionContent className="">
                     <CreditTable data={ActingCredits} columns={CastColumns}/>
                 </AccordionContent>
             </AccordionItem>}
             {newMiscCredits.map((department, index) => (
-                <AccordionItem key={index} value={department.department} >
+                <AccordionItem key={index+1} value={`accordian-${index+1}`}>
                     <AccordionTrigger>{department.department}</AccordionTrigger>
                     <AccordionContent>
                         <CreditTable data={department.credits} columns={CrewColumns}/>

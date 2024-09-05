@@ -27,6 +27,7 @@ const MovieInfoBackdrop = ({details}: PropTypes) => {
                     fill
                     priority
                     className={`absolute inset-0 w-full h-full object-cover transition-all duration-300 object-center ${isLoading ? "blur-lg" : "blur-0"}`}
+                    sizes="(min-width: 1480px) 1176px, calc(94.83vw - 208px)" 
                     placeholder='blur'
                     objectFit="cover"
                     layout="fill"

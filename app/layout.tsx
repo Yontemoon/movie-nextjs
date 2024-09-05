@@ -1,19 +1,14 @@
 
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-// import { Toaster } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import NextSessionProvider from "@/provider/NextSessionProvider";
-import { getServerSession } from "next-auth";
 import AccountInfoProvider from "@/provider/AccountInfoProvider";
 import Footer from "@/components/Footer";
-import { Separator } from "@/components/ui/separator";
 import { work_sans } from "@/utils/font";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Monte Movies",
@@ -26,20 +21,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-
-
-
   return (
     <html lang="en">
       <NextSessionProvider>
         <AccountInfoProvider>
           <body className={`${work_sans.className} bg-backgroundColor`}>
-            <div className="w-full flex flex-col ">
+            <div className="w-full flex flex-col">
               <Navbar />
               <div className="flex flex-col justify-center items-center content-center self-center text-white container px-28 ">
                 {children}
                 <Footer/>
-                <Toaster />
+                <Toaster/>
               </div>
             </div>
           </body>

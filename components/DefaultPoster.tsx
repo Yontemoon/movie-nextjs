@@ -10,7 +10,8 @@ const DefaultPoster = ({movieTitle}: PropsType) => {
             className="
                 w-full h-full transition-all rounded-md 
                 shadow-2xl  duration-300 cursor-pointer p-4 flex 
-                justify-center items-center text-sm bg-[#18212f] text-balance text-center overflow-auto whitespace-nowrap
+                justify-center items-center text-sm bg-[#18212f] text-balance text-center 
+                overflow-hidden whitespace-nowrap
             "
             >
             {movieTitle}

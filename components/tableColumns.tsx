@@ -77,7 +77,8 @@ export const CastColumns: ColumnDef<MovieCastDetails, any>[] = [
                                     alt={title} 
                                     width={200}
                                     height={300}
-                                    className="object-cover rounded-sm" 
+                                    className="object-cover border rounded-md" 
+                                    quality={70}
                                 /> }
                             </div>
                             <p className=" ml-4 text-sm  my-4 w-full  text-wrap text-ellipsis overflow-auto">
